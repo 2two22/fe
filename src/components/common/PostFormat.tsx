@@ -104,12 +104,12 @@ export default function PostFormat({ inputValue }: PostFormatPropsType) {
                           navigate(`/otherProfile/${data.member.id}/feed`);
                         }
                       }}
-                      src={S3_URL + data.member.profileImg}
+                      src={S3_URL + data.member.profileUrl}
                       alt={data.title}
                       className="aspect-square h-[58px] w-[58px] rounded-full object-cover"
                     />
                     <div className="w-full pl-3">
-                      <p className="text-xl font-bold">{data.member.nickname}</p>
+                      <p className="text-xl font-bold">{data.member.nickName}</p>
                       <p className="text-[17px] opacity-50">{timeForToday(data.createdAt)}</p>
                     </div>
                   </div>
@@ -121,7 +121,7 @@ export default function PostFormat({ inputValue }: PostFormatPropsType) {
                         }}
                         className="flex h-full items-center justify-end gap-3 whitespace-nowrap"
                       >
-                        {data.follow ? (
+                        {/* {data.follow ? (
                           <>
                             <FcCheckmark size={21} />
                             <p>팔로잉</p>
@@ -131,7 +131,7 @@ export default function PostFormat({ inputValue }: PostFormatPropsType) {
                             <FcPortraitMode />
                             <p>팔로우</p>
                           </>
-                        )}
+                        )} */}
                       </div>
                     </div>
                   )}
@@ -147,7 +147,7 @@ export default function PostFormat({ inputValue }: PostFormatPropsType) {
               {data.imageUrls && data.imageUrls.length > 0 && data.imageUrls[0] !== 'https://budproject.s3.ap-northeast-2.amazonaws.com/null' && (
                 <ImagePeek setIsPicPopUp={setIsPicPopUp} imgPeek={data.imageUrls as string[]} />
               )}
-              <LikeCommentScrap scrap={data.scrap} like={data.like} postType={data.postType} likeCount={data.likeCount} commentCount={data.commentCount} postId={data.id} refetch={refetch} />
+              <LikeCommentScrap like={data.like} postType={data.postType} likeCount={data.likeCount} commentCount={data.commentCount} postId = {data.id} refetch={refetch} />
             </li>
           ))
         ) : (

@@ -34,9 +34,7 @@ export default function Community() {
       <div className="relative mb-16 mt-9 flex h-full min-h-[calc(100vh-160px)] w-full flex-col items-center gap-4 p-4 text-lightText dark:text-white">
         <Header type="category" title="커뮤니티" icon={<FcGlobe />} restart={refetch} isLoading={isLoading} />
         <AddBtn url="/postCreate" text="글쓰기" />
-        <SearchBar inputValue={inputValue} setInputValue={setInputValue} />
         <CommunityFilter />
-        <CommunitySort />
         <PostFormat inputValue={inputValue} />
       </div>
       <FooterMenu />

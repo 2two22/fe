@@ -4,7 +4,7 @@ import customAxios from '../customAxios';
 const getUserFollowerList = async (token: string, id: number): Promise<UserFollowListType[]> => {
   return await customAxios({
     method: 'get',
-    url: `/users/${id}/followers`,
+    url: `/user/users/${id}/followers`,
     headers: {
       Authorization: token,
     },

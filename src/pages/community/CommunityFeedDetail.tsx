@@ -10,7 +10,7 @@ export default function CommunityFeedDetail() {
   const { id } = useParams();
   const [questionUserId, setQuestionUserId] = useState<number>();
   const [commentCount, setCommentCount] = useState<number>();
-  const { refetch } = useCommunityDetailQuery(Number(id));
+  const { refetch } = useCommunityDetailQuery(String(id));
 
   return (
     <section>

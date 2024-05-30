@@ -1,9 +1,9 @@
 import customAxios from '../customAxios';
 
-const postCommunityScrapAxios = async (token: string, postId: number) => {
+const postCommunityScrapAxios = async (token: string, newsId: number) => {
   return await customAxios({
     method: 'post',
-    url: `/posts/${postId}/scrap`,
+    url: `/news/news/${newsId}/scrap`,
     headers: {
       Authorization: token,
       'Content-Type': 'multipart/form-data',

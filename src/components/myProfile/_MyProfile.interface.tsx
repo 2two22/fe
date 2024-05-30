@@ -30,6 +30,7 @@ export interface MyProfileType {
   readonly nickName: string;
   readonly description: string;
   readonly level: number;
+  readonly scrap: number;
   readonly numberOfFollowers: number;
   readonly numberOfFollows: number;
   readonly numberOfPosts: number;
@@ -57,7 +58,7 @@ export interface memberType {
   readonly nickName: string;
   readonly oauthAccessToken: string;
   readonly password: null | string;
-  readonly profileImg: null | string;
+  readonly profileUrl: null | string;
   readonly status: string;
   readonly updatedAt: string;
   readonly userId: string;
@@ -67,7 +68,7 @@ export interface memberType {
 /** getMyScrapList - ScrpListType의 content 타입 */
 export interface ScrapPostContentType {
   readonly createdAt: string;
-  readonly postId: number;
+  readonly postId: string;
   readonly commentCount: number;
   readonly content: string;
   readonly title: string;
@@ -111,7 +112,7 @@ export interface MyProfileHeaderPropsType {
 
 /** MyProfileInfo - 나의 프로필 정보에 사용하는 props 타입 */
 export interface MyProfileInfoPropsType {
-  readonly level: number;
+  readonly scrap: number;
   readonly followers: number;
   readonly follows: number;
   readonly posts: number;

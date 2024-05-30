@@ -13,7 +13,7 @@ const getCommunityPostAxios = async (
 ): Promise<CommunityPostListType> => {
   return await customAxios({
     method: 'get',
-    url: `/posts?keyword=${word}&sort=${sort}&order=${order}&page=${page}&size=${size}&postType=${postType}`,
+    url: `/community/posts?page=${page}&size=${size}&postType=${postType}`,
     headers: {
       Authorization: token,
       'Content-Type': 'application/json',

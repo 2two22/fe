@@ -6,7 +6,7 @@ import { EditDeleteBtnPropsType } from './_Common.interface';
 export default function EditDeleteBtn({ postId, setIsMenu }: EditDeleteBtnPropsType) {
   const navigate = useNavigate();
 
-  const { mutateAsync: deletePostMutate } = useDeleteCommunityMutation(Number(postId));
+  const { mutateAsync: deletePostMutate } = useDeleteCommunityMutation(String(postId));
   const { refetch } = useCommunityPostQuery();
 
   return (

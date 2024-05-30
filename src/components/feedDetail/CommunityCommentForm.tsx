@@ -27,7 +27,7 @@ import { CommunityFeedCommentFormPropsType } from './_FeedDetail.interface';
 
 export default function CommunityCommentForm({ type, answerId, questionUserId, commentCount, refetch }: CommunityFeedCommentFormPropsType) {
   const { id: postId } = useParams();
-  const [commentId, setCommentId] = useState<number>(0);
+  const [commentId, setCommentId] = useState<string>('');
   const [comment, setComment] = useState<string>('');
   const [isCommentReply, setIsCommentReply] = useState<boolean>(false);
   const [commentReplyNickname, setCommentReplyNickname] = useState<string>('');
@@ -38,20 +38,20 @@ export default function CommunityCommentForm({ type, answerId, questionUserId, c
   // 사용자 정보 Recoil
   const logInUserInfo = useRecoilValue(loginUserInfo);
 
-  const { data: feedData, isLoading: feedIsLoading, error: feedError, refetch: feedCommentRefetch } = useFeedCommentQuery(Number(postId));
-  const { data: QnAData, isLoading: QnAIsLoading, error: QnAError, refetch: qnaCommentRefetch } = useQnACommentQuery(Number(answerId));
-  const { mutateAsync: deleteFeedCommentMutateAsync } = useDeleteFeedCommentMutation(commentId, Number(postId));
-  const { mutateAsync: deleteQnaCommentMutateAysnc } = useDeleteQnACommentMutation(commentId, Number(answerId));
-  const { mutate: deleteFeedCommentPinMutate } = useDeleteFeedCommentPinMutation(Number(postId));
-  const { mutate: deleteQnaCommentPinMutate } = useDeleteQnACommentPinMutation(Number(answerId));
-  const { mutate: feedCommentPinMutate } = useFeedCommentPinMutation(commentId, Number(postId));
-  const { mutate: qnaCommentPinMutate } = useQnACommentPinMutation(commentId, Number(answerId));
-  const { mutate: feedCommentLikeMutate } = useFeedCommentLikeMutation(commentId, Number(postId));
-  const { mutate: qnaCommentLikeMutate } = useQnACommentLikeMutation(commentId, Number(answerId));
-  const { mutateAsync: feedCommentMutateAsync } = useFeedCommentMutation(Number(postId));
-  const { mutateAsync: qnaCommentMutateAsync } = useQnaCommentMutation(Number(answerId));
-  const { mutateAsync: feedCommentReplyMutateAsync } = useFeedCommentReplyMutation(Number(commentId));
-  const { mutateAsync: qnaCommentReplyMutateAsync } = useQnaCommentReplyMutation(Number(commentId));
+  const { data: feedData, isLoading: feedIsLoading, error: feedError, refetch: feedCommentRefetch } = useFeedCommentQuery(String(postId));
+  const { data: QnAData, isLoading: QnAIsLoading, error: QnAError, refetch: qnaCommentRefetch } = useQnACommentQuery(String(answerId));
+  const { mutateAsync: deleteFeedCommentMutateAsync } = useDeleteFeedCommentMutation(String(commentId), String(postId));
+  const { mutateAsync: deleteQnaCommentMutateAysnc } = useDeleteQnACommentMutation(String(commentId), String(answerId));
+  const { mutate: deleteFeedCommentPinMutate } = useDeleteFeedCommentPinMutation(String(postId));
+  const { mutate: deleteQnaCommentPinMutate } = useDeleteQnACommentPinMutation(String(answerId));
+  const { mutate: feedCommentPinMutate } = useFeedCommentPinMutation(String(commentId), String(postId));
+  const { mutate: qnaCommentPinMutate } = useQnACommentPinMutation(String(commentId), String(answerId));
+  const { mutate: feedCommentLikeMutate } = useFeedCommentLikeMutation(String(commentId), String(postId));
+  const { mutate: qnaCommentLikeMutate } = useQnACommentLikeMutation(String(commentId), String(answerId));
+  const { mutateAsync: feedCommentMutateAsync } = useFeedCommentMutation(String(postId));
+  const { mutateAsync: qnaCommentMutateAsync } = useQnaCommentMutation(String(answerId));
+  const { mutateAsync: feedCommentReplyMutateAsync } = useFeedCommentReplyMutation(String(commentId));
+  const { mutateAsync: qnaCommentReplyMutateAsync } = useQnaCommentReplyMutation(String(commentId));
 
   const data = type === 'FEED' ? feedData : QnAData;
 
@@ -95,7 +95,7 @@ export default function CommunityCommentForm({ type, answerId, questionUserId, c
     }
   };
 
-  const handleClickLike = (commentId: number) => {
+  const handleClickLike = (commentId: string) => {
     setCommentId(commentId);
     if (type === 'FEED') {
       feedCommentLikeMutate();
@@ -104,17 +104,17 @@ export default function CommunityCommentForm({ type, answerId, questionUserId, c
     }
   };
 
-  const handleClickCommentReply = (commentId: number, commentReplyNickname: string) => {
+  const handleClickCommentReply = (commentId: string, commentReplyNickname: string) => {
     setIsCommentReply(true);
     setCommentId(commentId);
     setCommentReplyNickname(commentReplyNickname);
   };
 
-  // data?.pages.flatMap((comment: CommunityCommentType) =>
-  //   comment.content.map((content) => {
-  //     console.log(content);
-  //   })
-  // );
+  data?.pages.flatMap((comment: CommunityCommentType) =>
+    comment.content.map((content) => {
+      console.log(content);
+    })
+  );
 
   // if (feedIsLoading) {
   //   return (
@@ -134,9 +134,9 @@ export default function CommunityCommentForm({ type, answerId, questionUserId, c
   //   );
   // }
 
-  // if (feedError || QnAError) {
-  //   navigate('/NotFound');
-  // }
+  if (feedError || QnAError) {
+    navigate('/NotFound');
+  }
 
   useEffect(() => {
     if (type === 'FEED') {
@@ -160,10 +160,10 @@ export default function CommunityCommentForm({ type, answerId, questionUserId, c
             {data?.pages.flatMap((comment: CommunityCommentType) =>
               comment.content.map((content) => {
                 return (
-                  <div key={content.commentId} className="flex flex-col gap-4">
+                  <div key={content.id} className="flex flex-col gap-4">
                     <SwipeableListItem
                       swipeLeft={
-                        content.memberId === logInUserInfo?.id
+                        content.user.id === logInUserInfo?.id
                           ? {
                               content: (
                                 <div className="flex h-full w-full items-center justify-end bg-[#ff5232] p-4 text-white dark:bg-[#a51b0b]">
@@ -174,8 +174,8 @@ export default function CommunityCommentForm({ type, answerId, questionUserId, c
                                 </div>
                               ),
                               action: async () => {
-                                console.log('Deleting item:', content.commentId);
-                                setCommentId(content.commentId);
+                                console.log('Deleting item:', content.id);
+                                setCommentId(String(content.id));
                                 if (type === 'FEED') {
                                   await deleteFeedCommentMutateAsync();
                                   refetch();
@@ -192,15 +192,15 @@ export default function CommunityCommentForm({ type, answerId, questionUserId, c
                           ? {
                               content: (
                                 <div className="flex h-full w-full items-center justify-start bg-pointGreen p-4 text-white dark:bg-pointGreen">
-                                  <span className="flex items-center gap-2 text-lg">
+                                  {/* <span className="flex items-center gap-2 text-lg">
                                     고정하기
                                     <BsFillPinAngleFill />
-                                  </span>
+                                  </span> */}
                                 </div>
                               ),
                               action: () => {
-                                console.log('Pin item:', content.commentId);
-                                setCommentId(content.commentId);
+                                console.log('Pin item:', content.id);
+                                setCommentId(String(content.id));
                                 if (content.isPinned) {
                                   if (type === 'FEED') {
                                     deleteFeedCommentPinMutate();
@@ -222,15 +222,15 @@ export default function CommunityCommentForm({ type, answerId, questionUserId, c
                     >
                       <li className="flex min-h-[60px] w-full gap-2 bg-midIvory px-4 dark:bg-midNavy">
                         <LazyLoadImage
-                          onClick={() => (content.memberId === logInUserInfo?.id ? navigate(`/myProfile/feed`) : navigate(`/otherProfile/${content.memberId}/feed`))}
-                          src={S3_URL + content.memberProfileUrl}
-                          alt={content.memberName}
+                          onClick={() => (content.user.id === logInUserInfo?.id ? navigate(`/myProfile/feed`) : navigate(`/otherProfile/${content.user.id}/feed`))}
+                          src={S3_URL + content.user.profileUrl}
+                          alt={content.user.nickName}
                           className="h-[50px] w-[50px] shrink-0 cursor-pointer rounded-full object-cover"
                         ></LazyLoadImage>
                         <div className="flex h-full w-full flex-col justify-between gap-1">
                           <div className="flex w-full justify-between">
                             <div className="flex items-center gap-1">
-                              <div className="text-[15px] font-semibold">{content.memberName}</div>
+                              <div className="text-[15px] font-semibold">{content.user.nickName}</div>
                               <BsDot className="opacity-70" />
                               <div className="mr-2 text-[14px] opacity-70">{content.createdAt}</div>
                               {content.isPinned && (
@@ -243,13 +243,13 @@ export default function CommunityCommentForm({ type, answerId, questionUserId, c
                           </div>
                           <div className="flex justify-between">
                             <div className="text-[15px]">{content.content.replaceAll('"', '')}</div>
-                            <div onClick={() => handleClickLike(content.commentId)} className="flex cursor-pointer items-center justify-center gap-1">
-                              {content.isReaderLiked ? <BsHeartFill className="text-[#f44336]" /> : <BsHeartFill className="text-white opacity-50" />}
+                            <div onClick={() => handleClickLike(String(content.id))} className="flex cursor-pointer items-center justify-center gap-1">
+                              {content.isUserLiked ? <BsHeartFill className="text-[#f44336]" /> : <BsHeartFill className="text-white opacity-50" />}
                               <span className="text-[13px]">{content.numberOfLikes}</span>
                             </div>
                           </div>
                           <div>
-                            <span onClick={() => handleClickCommentReply(content.commentId, content.memberName)} className="cursor-pointer text-[14px] opacity-60">
+                            <span onClick={() => handleClickCommentReply(String(content.id), content.user.nickName)} className="cursor-pointer text-[14px] opacity-60">
                               답글 달기
                             </span>
                           </div>
@@ -259,9 +259,9 @@ export default function CommunityCommentForm({ type, answerId, questionUserId, c
                     {content.reComments.length > 0 &&
                       content.reComments.map((reComment: any) => (
                         <SwipeableListItem
-                          key={reComment.commentId}
+                          key={reComment.id}
                           swipeLeft={
-                            reComment.memberId === logInUserInfo?.id
+                            reComment.user.id === logInUserInfo?.id
                               ? {
                                   content: (
                                     <div className="flex h-full w-full items-center justify-end bg-[#ff5232] p-4 text-white dark:bg-[#a51b0b]">
@@ -272,8 +272,8 @@ export default function CommunityCommentForm({ type, answerId, questionUserId, c
                                     </div>
                                   ),
                                   action: async () => {
-                                    console.log('Deleting item:', reComment.commentId);
-                                    setCommentId(reComment.commentId);
+                                    console.log('Deleting item:', reComment.id);
+                                    setCommentId(reComment.id);
                                     if (type === 'FEED') {
                                       await deleteFeedCommentMutateAsync();
                                       refetch();
@@ -286,27 +286,27 @@ export default function CommunityCommentForm({ type, answerId, questionUserId, c
                               : undefined
                           }
                         >
-                          <div key={reComment.commentId} className="flex w-full pl-8">
+                          <div key={reComment.id} className="flex w-full pl-8">
                             <BsArrowReturnRight className="relative top-[10px] text-lightText opacity-60 dark:text-white" size={25} />
                             <li className="flex min-h-[60px] w-full list-none gap-2 bg-midIvory px-4 dark:bg-midNavy">
                               <LazyLoadImage
-                                onClick={() => (reComment.memberId === logInUserInfo?.id ? navigate(`/myProfile/feed`) : navigate(`/otherProfile/${content.memberId}/feed`))}
-                                src={S3_URL + (reComment.memberProfileUrl ?? 'file/2023-04-25/d85de5cdbbdd440a9874020d3b250d5d_20230425205043366.jpeg')}
-                                alt={reComment.memberName}
+                                onClick={() => (reComment.user.id === logInUserInfo?.id ? navigate(`/myProfile/feed`) : navigate(`/otherProfile/${content.user.id}/feed`))}
+                                src={S3_URL + (reComment.user.profileUrl ?? 'file/2023-04-25/d85de5cdbbdd440a9874020d3b250d5d_20230425205043366.jpeg')}
+                                alt={reComment.user.nickName}
                                 className="h-[50px] w-[50px] shrink-0 cursor-pointer rounded-full object-cover"
                               ></LazyLoadImage>
                               <div className="flex h-full w-full flex-col gap-1">
                                 <div className="flex w-full justify-between">
                                   <div className="flex items-center gap-1">
-                                    <div className="text-[15px] font-semibold">{reComment.memberName}</div>
+                                    <div className="text-[15px] font-semibold">{reComment.user.nickName}</div>
                                     <BsDot className="opacity-70" />
                                     <div className="mr-2 text-[14px] opacity-70">{reComment.createdAt}</div>
                                   </div>
                                 </div>
                                 <div className="flex justify-between">
                                   <div className="text-[15px]">{reComment.content?.replaceAll('"', '')}</div>
-                                  <div onClick={() => handleClickLike(reComment.commentId)} className="flex cursor-pointer items-center justify-center gap-1">
-                                    {reComment.isReaderLiked ? <BsHeartFill className="text-[#f44336]" /> : <BsHeartFill className="text-white opacity-50" />}
+                                  <div onClick={() => handleClickLike(reComment.id)} className="flex cursor-pointer items-center justify-center gap-1">
+                                    {reComment.isUserLiked ? <BsHeartFill className="text-[#f44336]" /> : <BsHeartFill className="text-white opacity-50" />}
                                     <span className="text-[13px]">{reComment.numberOfLikes}</span>
                                   </div>
                                 </div>

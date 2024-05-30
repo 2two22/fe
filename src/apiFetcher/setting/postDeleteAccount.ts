@@ -3,7 +3,7 @@ import customAxios from '../customAxios';
 const postDeleteAccountAxios = async (token: string) => {
   return await customAxios({
     method: 'post',
-    url: `/member/withdraw`,
+    url: `/user/member/withdraw`,
     headers: {
       Authorization: token,
       'Content-Type': 'application/json',

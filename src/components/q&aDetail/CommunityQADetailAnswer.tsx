@@ -35,13 +35,13 @@ export default function CommunityQADetailAnswer({ isCommentOpen, setIsCommentOpe
   const [answerId, setAnswerId] = useState<number>();
 
   //리액트 쿼리
-  const { data: answerData, refetch: answerRefetch } = useCommunityAnswerQuery(Number(postId));
-  const { refetch: detailRefetch } = useCommunityDetailQuery(Number(postId));
+  const { data: answerData, refetch: answerRefetch } = useCommunityAnswerQuery(String(postId));
+  const { refetch: detailRefetch } = useCommunityDetailQuery(String(postId));
 
-  const { mutate: followMutate } = useFollowMutation(Number(userId), Number(postId));
-  const { mutateAsync: pinAnswerMutateAsync } = usePinAnswerMutation(Number(answerId));
-  const { mutate: likeAnswerMutate } = usePostQnaAnswerLikeMutation(Number(postId));
-  const { mutateAsync: deleteAnswerMutate } = useDeleteQnaAnswerMutation(Number(answerId), Number(postId));
+  const { mutate: followMutate } = useFollowMutation(Number(userId), String(postId));
+  const { mutateAsync: pinAnswerMutateAsync } = usePinAnswerMutation(String(answerId));
+  const { mutate: likeAnswerMutate } = usePostQnaAnswerLikeMutation(String(postId));
+  const { mutateAsync: deleteAnswerMutate } = useDeleteQnaAnswerMutation(String(answerId), String(postId));
 
   //사진 팝업모달
   const [isPicPopUp, setIsPicPopUp] = useState({
@@ -167,8 +167,8 @@ export default function CommunityQADetailAnswer({ isCommentOpen, setIsCommentOpe
                         navigate(`/otherProfile/${answer.member.id}/feed`);
                       }}
                       className="aspect-square h-[58px] w-[58px] cursor-pointer rounded-full object-cover"
-                      src={S3_URL + answer.member.profileImg}
-                      alt={answer.member.nickname}
+                      src={S3_URL + answer.member.profileUrl}
+                      alt={answer.member.nickName}
                     />
                     <div className="pl-3">
                       <div className="flex flex-col gap-1">
@@ -179,7 +179,7 @@ export default function CommunityQADetailAnswer({ isCommentOpen, setIsCommentOpe
                           }}
                           className="cursor-pointer text-xl font-bold"
                         >
-                          {answer.member.nickname}
+                          {answer.member.nickName}
                         </p>
                         <p className="text-[17px] opacity-50">{timeForToday(answer.createdAt)}</p>
                       </div>

@@ -15,6 +15,7 @@ import { useRecoilValue } from 'recoil';
 export function useMyProfileQuery(enabled: boolean = true) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
+  console.log(loginUser?.token);
   return useQuery(['myProfile'], () => getMyProfileInfo(loginUser?.token as string), {
     enabled: enabled,
     refetchOnMount: true,

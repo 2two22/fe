@@ -1,9 +1,9 @@
 import customAxios from '../customAxios';
 
-const updateCommunityPostAxios = async (token: string, postData: FormData, postId: number) => {
+const updateCommunityPostAxios = async (token: string, postData: FormData, postId: string) => {
   return await customAxios({
-    method: 'post',
-    url: `/posts/${postId}`,
+    method: 'put',
+    url: `/community/posts/${postId}`,
     headers: {
       Authorization: token,
       'Content-Type': 'multipart/form-data',

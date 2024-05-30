@@ -1,17 +1,17 @@
 import { BsFillHandThumbsUpFill } from 'react-icons/bs';
 import { FcLike, FcSms, FcVoicePresentation } from 'react-icons/fc';
 import { useRecoilValue } from 'recoil';
-import { useCommunityLikeMutation, useCommunityScrapMutation } from '../../store/module/useCommunityQuery';
+import { useCommunityLikeMutation } from '../../store/module/useCommunityQuery';
 import { loginUserInfo } from '../../store/recoil/user';
 import { LikeCommentScrapPropsType } from './_Common.interface';
 
-export default function LikeCommentScrap({ postType, likeCount, commentCount, postId, refetch, like, scrap }: LikeCommentScrapPropsType) {
+export default function LikeCommentScrap({ postType, likeCount, commentCount, postId, refetch, like }: LikeCommentScrapPropsType) {
   // 사용자 정보 Recoil
   const logInUserInfo = useRecoilValue(loginUserInfo);
 
   // 리액트 쿼리
   const { mutateAsync: likeMutate } = useCommunityLikeMutation(postId, logInUserInfo?.id as number, postType);
-  const { mutateAsync: scrapMutate } = useCommunityScrapMutation(postId, logInUserInfo?.id as number, postType);
+  // const { mutateAsync: scrapMutate } = useCommunityScrapMutation(postId, logInUserInfo?.id as number, postType);
 
   return (
     <div className="flex h-[54px] w-full items-center justify-between rounded-b-[20px] bg-[#A49C7C] p-4 text-base text-white dark:bg-[#2C2E34]">
@@ -42,7 +42,7 @@ export default function LikeCommentScrap({ postType, likeCount, commentCount, po
           {commentCount}
         </div>
       </div>
-      <div
+      {/* <div
         className="flex cursor-pointer items-center justify-end gap-2"
         onClick={async (e) => {
           e.stopPropagation();
@@ -54,7 +54,7 @@ export default function LikeCommentScrap({ postType, likeCount, commentCount, po
           <path fill={scrap ? `#f9e288` : '#ffffff80'} d="M37,43l-13-6l-13,6V9c0-2.2,1.8-4,4-4h18c2.2,0,4,1.8,4,4V43z"></path>
         </svg>
         {`스크랩`}
-      </div>
+      </div> */}
     </div>
   );
 }

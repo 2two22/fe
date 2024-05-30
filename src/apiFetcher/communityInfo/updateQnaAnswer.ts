@@ -1,9 +1,9 @@
 import customAxios from '../customAxios';
 
-export const updateQnaAnswerAxios = async (token: string, answerId: number, answerPost: FormData) => {
+export const updateQnaAnswerAxios = async (token: string, answerId: string, answerPost: FormData) => {
   return await customAxios({
-    method: 'post',
-    url: `/posts/qna-answers/${answerId}`,
+    method: 'put',
+    url: `/community/posts/answers/${answerId}`,
     headers: {
       Authorization: token,
       'Content-Type': 'multipart/form-data',

@@ -7,6 +7,7 @@ import { loginUserInfo } from '../recoil/user';
 export function useGithubQuery() {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
+  console.log(loginUser?.token);
   return useQuery(['githubInfo'], () => getGithubInfoAxios(loginUser?.token as string), {
     enabled: false,
     refetchOnMount: true,

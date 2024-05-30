@@ -4,7 +4,7 @@ import customAxios from '../customAxios';
 const getMyProfileInfo = async (token: string): Promise<MyProfileType> => {
   return await customAxios({
     method: 'get',
-    url: `/member`,
+    url: `/user/member`,
     headers: {
       'Content-Type': 'application/json',
       Authorization: token,

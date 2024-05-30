@@ -17,7 +17,7 @@ import { putFeedCommentEditAxios, putQnaCommentEditAxios } from '../../apiFetche
 import { loginUserInfo } from '../recoil/user';
 import { useRecoilValue } from 'recoil';
 
-export function useCommunityDetailQuery(id: number) {
+export function useCommunityDetailQuery(id: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   return useQuery(['CommunityDetail', id], () => getCommunityDetailAxios(loginUser?.token as string, id), {
@@ -30,7 +30,7 @@ export function useCommunityDetailQuery(id: number) {
 }
 
 //QnA 답변 조회
-export function useCommunityAnswerQuery(id: number) {
+export function useCommunityAnswerQuery(id: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   return useQuery(['CommunityAnswer', id], () => getQnaAnswerAxios(loginUser?.token as string, id), {
@@ -59,7 +59,7 @@ export function useCreateAnswerMutation() {
 }
 
 //QnA 답변 수정
-export function useUpdateAnswerMutation(answerId: number) {
+export function useUpdateAnswerMutation(answerId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   return useMutation((answer: FormData) => updateQnaAnswerAxios(loginUser?.token as string, answerId, answer), {
@@ -73,7 +73,7 @@ export function useUpdateAnswerMutation(answerId: number) {
 }
 
 //QnA 답변 핀
-export function usePinAnswerMutation(id: number) {
+export function usePinAnswerMutation(id: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   return useMutation(() => postQnaAnswerPinAxios(loginUser?.token as string, id), {
@@ -101,7 +101,7 @@ export function useDeletePinAnswerMutation() {
 }
 
 // 개발 피드 댓글 조회
-export function useFeedCommentQuery(id: number) {
+export function useFeedCommentQuery(id: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   return useInfiniteQuery(['CommunityComment', id], ({ pageParam = 0 }) => getFeedCommentAxios(loginUser?.token as string, pageParam, id), {
@@ -121,7 +121,7 @@ export function useFeedCommentQuery(id: number) {
 }
 
 // 개발 피드 댓글 좋아요 / 좋아요 취소
-export function useFeedCommentLikeMutation(id: number, postId: number) {
+export function useFeedCommentLikeMutation(id: string, postId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   const { refetch } = useFeedCommentQuery(postId);
@@ -131,13 +131,13 @@ export function useFeedCommentLikeMutation(id: number, postId: number) {
     },
     onSuccess: () => {
       console.log('좋아요 상태 변경 반영되었습니다.');
-      if (postId !== 0) refetch();
+      if (postId !== "") refetch();
     },
   });
 }
 
 // 개발 피드 댓글 핀 / 핀 변경
-export function useFeedCommentPinMutation(id: number, postId: number) {
+export function useFeedCommentPinMutation(id: string, postId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   const { refetch } = useFeedCommentQuery(postId);
@@ -153,7 +153,7 @@ export function useFeedCommentPinMutation(id: number, postId: number) {
 }
 
 // 개발 피드 댓글 핀 취소
-export function useDeleteFeedCommentPinMutation(id: number) {
+export function useDeleteFeedCommentPinMutation(id: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   const { refetch } = useFeedCommentQuery(id);
@@ -169,7 +169,7 @@ export function useDeleteFeedCommentPinMutation(id: number) {
 }
 
 // 개발 피드 댓글 삭제
-export function useDeleteFeedCommentMutation(commentId: number, postId: number) {
+export function useDeleteFeedCommentMutation(commentId: string, postId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   const { refetch } = useFeedCommentQuery(postId);
@@ -185,7 +185,7 @@ export function useDeleteFeedCommentMutation(commentId: number, postId: number) 
 }
 
 // QnA 피드 댓글 조회
-export function useQnACommentQuery(id: number) {
+export function useQnACommentQuery(id: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   return useInfiniteQuery(['CommunityComment', id], ({ pageParam = 0 }) => getQnACommentAxios(loginUser?.token as string, pageParam, id), {
@@ -205,7 +205,7 @@ export function useQnACommentQuery(id: number) {
 }
 
 // QnA 피드 댓글 좋아요 / 좋아요 취소
-export function useQnACommentLikeMutation(id: number, answerId: number) {
+export function useQnACommentLikeMutation(id: string, answerId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   const { refetch } = useQnACommentQuery(answerId);
@@ -215,13 +215,13 @@ export function useQnACommentLikeMutation(id: number, answerId: number) {
     },
     onSuccess: () => {
       console.log('좋아요 상태 변경 반영되었습니다.');
-      if (answerId !== 0) refetch();
+      if (answerId !== "") refetch();
     },
   });
 }
 
 // QnA 피드 댓글 핀 / 핀 변경
-export function useQnACommentPinMutation(commentId: number, answerId: number) {
+export function useQnACommentPinMutation(commentId: string, answerId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   const { refetch } = useQnACommentQuery(answerId);
@@ -237,7 +237,7 @@ export function useQnACommentPinMutation(commentId: number, answerId: number) {
 }
 
 // QnA 피드 댓글 핀 취소
-export function useDeleteQnACommentPinMutation(answerId: number) {
+export function useDeleteQnACommentPinMutation(answerId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   const { refetch } = useQnACommentQuery(answerId);
@@ -253,7 +253,7 @@ export function useDeleteQnACommentPinMutation(answerId: number) {
 }
 
 // QnA 피드 댓글 삭제
-export function useDeleteQnACommentMutation(commentId: number, AnswerId: number) {
+export function useDeleteQnACommentMutation(commentId: string, AnswerId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   const { refetch } = useQnACommentQuery(AnswerId);
@@ -269,7 +269,7 @@ export function useDeleteQnACommentMutation(commentId: number, AnswerId: number)
 }
 
 // QNA 답변 좋아요 상태 변경
-export function usePostQnaAnswerLikeMutation(postId: number) {
+export function usePostQnaAnswerLikeMutation(postId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   const { refetch } = useCommunityAnswerQuery(postId);
@@ -286,7 +286,7 @@ export function usePostQnaAnswerLikeMutation(postId: number) {
 }
 
 // QnA 답변 삭제
-export function useDeleteQnaAnswerMutation(answerId: number, questionId: number) {
+export function useDeleteQnaAnswerMutation(answerId: string, questionId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   const { refetch } = useCommunityAnswerQuery(questionId);
@@ -302,7 +302,7 @@ export function useDeleteQnaAnswerMutation(answerId: number, questionId: number)
 }
 
 // 개발 피드 댓글 작성
-export function useFeedCommentMutation(postId: number) {
+export function useFeedCommentMutation(postId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   return useMutation((comment: string) => postFeedCommentAxios(loginUser?.token as string, postId, comment), {
@@ -316,7 +316,7 @@ export function useFeedCommentMutation(postId: number) {
 }
 
 // QnA 피드 댓글 작성
-export function useQnaCommentMutation(answerId: number) {
+export function useQnaCommentMutation(answerId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   return useMutation((comment: string) => postQnaCommentAxios(loginUser?.token as string, answerId, comment), {
@@ -330,7 +330,7 @@ export function useQnaCommentMutation(answerId: number) {
 }
 
 // 개발 피드 댓글 수정
-export function useFeedCommentEditMutation(commentId: number) {
+export function useFeedCommentEditMutation(commentId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   return useMutation((content: string) => putFeedCommentEditAxios(loginUser?.token as string, commentId, content), {
@@ -344,7 +344,7 @@ export function useFeedCommentEditMutation(commentId: number) {
 }
 
 // qna 피드 댓글 수정
-export function useQnaCommentEditMutation(commentId: number) {
+export function useQnaCommentEditMutation(commentId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   return useMutation((content: string) => putQnaCommentEditAxios(loginUser?.token as string, commentId, content), {
@@ -358,7 +358,7 @@ export function useQnaCommentEditMutation(commentId: number) {
 }
 
 // 개발 피드 대댓글 작성
-export function useFeedCommentReplyMutation(commentId: number) {
+export function useFeedCommentReplyMutation(commentId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   return useMutation((comment: string) => postFeedCommentReplyAxios(loginUser?.token as string, commentId, comment), {
@@ -372,7 +372,7 @@ export function useFeedCommentReplyMutation(commentId: number) {
 }
 
 // qna 피드 대댓글 작성
-export function useQnaCommentReplyMutation(commentId: number) {
+export function useQnaCommentReplyMutation(commentId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   return useMutation((comment: string) => postQnaCommentReplyAxios(loginUser?.token as string, commentId, comment), {

@@ -21,19 +21,19 @@ export default function PostEdit() {
   const [isClick, setIsClick] = useState<boolean>(true);
 
   // 게시글 전체 정보
-  const { data, isLoading, error, refetch } = useCommunityDetailQuery(Number(postId));
+  const { data, isLoading, error, refetch } = useCommunityDetailQuery(String(postId));
   const [postInfo, setPostInfo] = useState<Partial<CommunityPostType>>({
     postTypeInfo: 'POST_UPDATE',
     title: data?.title,
     content: data?.content,
     postType: data?.postType,
     images: data?.imageUrls,
-    postId: Number(postId),
+    postId: String(postId),
   } as Partial<CommunityPostType>);
 
   useEffect(() => {
     refetch();
-    setPostInfo({ postTypeInfo: 'POST_UPDATE', title: data?.title, content: data?.content, postType: data?.postType, images: data?.imageUrls, postId: Number(postId) } as Partial<CommunityPostType>);
+    setPostInfo({ postTypeInfo: 'POST_UPDATE', title: data?.title, content: data?.content, postType: data?.postType, images: data?.imageUrls, postId: String(postId) } as Partial<CommunityPostType>);
     setImgPeek((data?.imageUrls as string[])?.map((i) => S3_URL + i));
   }, [isLoading]);
 

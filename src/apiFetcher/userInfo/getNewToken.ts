@@ -5,7 +5,7 @@ export const getNewToken = async (token: string) => {
   try {
     const response = await axios({
       method: 'get',
-      url: BASE_URL + 'refresh',
+      url: BASE_URL + 'user/refresh',
       headers: {
         Authorization: token,
       },

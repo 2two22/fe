@@ -3,7 +3,7 @@ import customAxios from '../customAxios';
 export const postQnaAnswerLikeAxios = async (token: string, answerId: number) => {
   return await customAxios({
     method: 'post',
-    url: `/posts/qna-answers/${answerId}/like`,
+    url: `/community/posts/answers/${answerId}/like`,
     headers: {
       Authorization: token,
       'Content-Type': 'application/json',

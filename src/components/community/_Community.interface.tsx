@@ -54,7 +54,7 @@ export interface CommunityPostListContentMemberType {
   readonly userId: string;
   readonly level: Partial<MemberLevelType>;
   readonly nickName: string;
-  readonly profileImg: null | string;
+  readonly profileUrl: null | string;
   readonly job: null | string;
   readonly status: string;
   readonly introduceMessage: null | string;
@@ -73,10 +73,8 @@ export interface CommunityPostListContentMemberType {
 
 /** getCommunityPostAxios - 커뮤니티 post 불러올때 response의 content 타입 */
 export interface CommunityPostListContentType {
-  readonly follow: boolean;
-  readonly scrap: boolean;
   readonly like: boolean;
-  readonly id: number;
+  readonly id: string;
   readonly member: CommunityPostListContentMemberType;
   readonly title: string;
   readonly imageUrls: string[];
@@ -113,8 +111,8 @@ export interface CommunityDetailListContentMemberType {
   readonly id: number;
   readonly userId: string;
   readonly level: Partial<MemberLevelType>;
-  readonly nickname: string;
-  readonly profileImg: null | string;
+  readonly nickName: string;
+  readonly profileUrl: null | string;
   readonly job: null | string;
   readonly status: string;
   readonly introduceMessage: null | string;
@@ -134,7 +132,7 @@ export interface CommunityDetailListContentMemberType {
 /** getCommunityDetailAxios - 커뮤니티 디테일 게시물에 대한 response 타입*/
 export interface getCommunityDetailType {
   readonly follow: boolean;
-  readonly id: number;
+  readonly id: string;
   readonly title: string;
   readonly member: CommunityDetailListContentMemberType;
   readonly imageUrls: null[] | string[];
@@ -160,7 +158,7 @@ export interface CommunityPostType {
   readonly content: string;
   readonly images: null | string[] | Blob[];
   readonly postType: postType;
-  readonly postId: number;
+  readonly postId: string;
 }
 
 /** postQnaAnswerAxios - QNA 답변 작성 혹은 수정시 넘겨주는 데이터, 폼데이터로 변경하기 전 상태.
@@ -175,15 +173,16 @@ export interface QnaAnswerType {
 
 export interface CommentContentType {
   readonly reComments: any;
-  readonly commentId: number;
+  readonly id: number;
   readonly content: string;
   readonly createdAt: string;
   readonly isPinned: boolean;
   readonly isReader: boolean;
-  readonly isReaderLiked: boolean;
-  readonly memberId: number;
-  readonly memberName: string;
-  readonly memberProfileUrl: string | null;
+  readonly isUserLiked: boolean;
+  readonly user: CommunityDetailListContentMemberType;
+  // readonly memberId: number;
+  // readonly memberName: string;
+  // readonly memberProfileUrl: string | null;
   readonly numberOfLikes: number;
 }
 

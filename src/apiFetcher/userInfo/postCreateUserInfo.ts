@@ -3,7 +3,7 @@ import customAxios from '../customAxios';
 const postCreateUserInfoAxios = async (token: string, data: FormData) => {
   return await customAxios({
     method: 'post',
-    url: `/addInfo`,
+    url: `/user/addInfo`,
     headers: {
       'Content-Type': 'multipart/form-data',
       Authorization: token,

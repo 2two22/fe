@@ -1,9 +1,9 @@
 import customAxios from '../customAxios';
 
-export const postQnaAnswerPinAxios = async (token: string, answerId: number) => {
+export const postQnaAnswerPinAxios = async (token: string, answerId: string) => {
   return await customAxios({
     method: 'post',
-    url: `/posts/qna-answers/${answerId}/pin`,
+    url: `/community/posts/answers/${answerId}/pin`,
     headers: {
       Authorization: token,
       'Content-Type': 'application/json',

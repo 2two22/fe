@@ -8,6 +8,7 @@ import newsDefaultImg from '../../assets/newsDefaultImg.webp';
 import { useNavigate } from 'react-router-dom';
 import { timeForToday } from '../../utils/timeForToday';
 import ScrollToTopBtn from '../../components/common/ScrollToTopBtn';
+import Scrap from '../../components/common/Scrap';
 
 export default function NewsDetail() {
   const [isScroll, setIsScroll] = useState(false);

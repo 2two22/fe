@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserListModal from '../common/UserListModal';
 import { MyProfileInfoPropsType } from './_MyProfile.interface';
+import Scrap from '../common/Scrap';
 
-export default function MyProfileInfo({ level, followers, follows, posts, isLoading }: MyProfileInfoPropsType) {
+export default function MyProfileInfo({ scrap, followers, follows, posts, isLoading }: MyProfileInfoPropsType) {
   const navigate = useNavigate();
   const [type, setType] = useState('');
   const [isUserList, setIsUserList] = useState<boolean>(false);
@@ -40,7 +41,7 @@ export default function MyProfileInfo({ level, followers, follows, posts, isLoad
             <div className="mt-2 text-[18px] font-medium">팔로우</div>
           </div>
           <div className="flex flex-col items-center justify-around text-[22px] font-bold">
-            <div>{level}</div>
+            <div>{scrap}</div>
             <div className="mt-2 text-[18px] font-medium">성장레벨</div>
           </div>
         </div>

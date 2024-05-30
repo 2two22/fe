@@ -52,7 +52,7 @@ export function usePostCommunityMutation() {
   });
 }
 
-export function useUpdateCommunityMutation(postId: number) {
+export function useUpdateCommunityMutation(postId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   return useMutation((data: FormData) => updateCommunityPostAxios(loginUser?.token as string, data, postId), {
@@ -66,7 +66,7 @@ export function useUpdateCommunityMutation(postId: number) {
   });
 }
 
-export function useDeleteCommunityMutation(id: number) {
+export function useDeleteCommunityMutation(id: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   const { refetch } = useMyProfileQuery();
@@ -82,7 +82,7 @@ export function useDeleteCommunityMutation(id: number) {
   });
 }
 
-export function useCommunityLikeMutation(postId: number, userId: number, postType: string) {
+export function useCommunityLikeMutation(postId: string, userId: number, postType: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   const { refetch: detailRefetch } = useCommunityDetailQuery(postId);
@@ -99,34 +99,34 @@ export function useCommunityLikeMutation(postId: number, userId: number, postTyp
   });
 }
 
-export function useCommunityScrapMutation(postId: number, userId: number, postType: string) {
-  //리코일
-  const loginUser = useRecoilValue(loginUserInfo);
-  const { refetch: myScrapRefetch } = useMyScrapsQuery('POST_DATE');
-  const { refetch: detailRefetch } = useCommunityDetailQuery(postId);
-  const { refetch: myPageRefetch } = useProfilePostQuery(userId, postType);
-  return useMutation(() => postCommunityScrapAxios(loginUser?.token as string, postId), {
-    onError: (err) => {
-      console.log(err);
-    },
-    onSuccess: () => {
-      detailRefetch();
-      myPageRefetch();
-      myScrapRefetch();
-      console.log('게시물 스크랩 상태 변경 반영됨');
-    },
-  });
-}
+// export function useCommunityScrapMutation(postId: string, userId: number, postType: string) {
+//   //리코일
+//   const loginUser = useRecoilValue(loginUserInfo);
+//   const { refetch: myScrapRefetch } = useMyScrapsQuery('POST_DATE');
+//   const { refetch: detailRefetch } = useCommunityDetailQuery(postId);
+//   const { refetch: myPageRefetch } = useProfilePostQuery(userId, postType);
+//   return useMutation(() => postCommunityScrapAxios(loginUser?.token as string, postId), {
+//     onError: (err) => {
+//       console.log(err);
+//     },
+//     onSuccess: () => {
+//       detailRefetch();
+//       myPageRefetch();
+//       myScrapRefetch();
+//       console.log('게시물 스크랩 상태 변경 반영됨');
+//     },
+//   });
+// }
 
-export function useFollowMutation(userId: number, postId?: number) {
+export function useFollowMutation(userId: number, postId?: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   const { refetch: myFollowersRefetch } = useMyFollowersQuery();
   const { refetch: myFollowsRefetch } = useMyFollowsQuery();
   const { refetch: userProfileRefetch } = useUserProfileQuery(userId);
-  const { refetch: detailRefetch } = useCommunityDetailQuery(Number(postId));
+  const { refetch: detailRefetch } = useCommunityDetailQuery(String(postId));
   const { refetch: myScrapRefetch } = useMyScrapsQuery();
-  const { refetch: qnaAnswerRefetch } = useCommunityAnswerQuery(Number(postId));
+  const { refetch: qnaAnswerRefetch } = useCommunityAnswerQuery(String(postId));
   return useMutation(() => postUserFollow(loginUser?.token as string, userId), {
     onError: (err) => {
       console.log(err);

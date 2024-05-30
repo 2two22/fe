@@ -1,9 +1,9 @@
 import customAxios from '../customAxios';
 
-export const postFeedCommentReplyAxios = async (token: string, commentId: number, comment: string) => {
+export const postFeedCommentReplyAxios = async (token: string, commentId: string, comment: string) => {
   return await customAxios({
     method: 'post',
-    url: `/posts/comments/${commentId}`,
+    url: `/community/posts/comments/${commentId}`,
     headers: {
       Authorization: token,
       'Content-Type': 'application/json',
@@ -13,10 +13,10 @@ export const postFeedCommentReplyAxios = async (token: string, commentId: number
   });
 };
 
-export const postQnaCommentReplyAxios = async (token: string, commentId: number, comment: string) => {
+export const postQnaCommentReplyAxios = async (token: string, commentId: string, comment: string) => {
   return await customAxios({
     method: 'post',
-    url: `/posts/qna-answers/qna-comments/${commentId}`,
+    url: `/community/answers/comments/${commentId}`,
     headers: {
       Authorization: token,
       'Content-Type': 'application/json',

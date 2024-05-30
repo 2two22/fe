@@ -1,9 +1,9 @@
 import customAxios from '../customAxios';
 
-const postCommunityLikeAxios = async (token: string, postId: number) => {
+const postCommunityLikeAxios = async (token: string, postId: string) => {
   return await customAxios({
     method: 'post',
-    url: `/posts/${postId}/like`,
+    url: `/community/posts/${postId}/like`,
     headers: {
       Authorization: token,
       'Content-Type': 'multipart/form-data',

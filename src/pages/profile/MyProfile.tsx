@@ -118,7 +118,6 @@ export default function MyProfile() {
           isLoading={myProfileIsLoading}
         />
         <MyProfileMenu postView={postView} setPostView={setPostView} />
-        <ProfileSort postView={postView} setSortAndOrder={postView === 'scrap' ? setScrapSortAndOrder : setSortAndOrder} sortAndOrder={postView === 'scrap' ? scrapSortAndOrder : sortAndOrder} />
         {postView !== 'scrap' && (
           <FeedPostFormat userData={myProfileData} resultData={profilePostData?.pages.flatMap((page) => page.content)} refetch={profilePostRefetch} profilePostIsLoading={profilePostIsLoading} />
         )}

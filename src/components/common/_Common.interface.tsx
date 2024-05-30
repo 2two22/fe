@@ -71,9 +71,16 @@ export interface LikeCommentScrapPropsType {
   readonly postType: postType;
   readonly likeCount: number;
   readonly commentCount: number;
-  readonly postId: number;
+  readonly postId: string;
   readonly refetch?: () => void;
   readonly like: boolean;
+  // readonly scrap: boolean;
+}
+
+/** Scrap 컴포넌트 props 타입 */
+export interface ScrapPropsType {
+  readonly newsId: number;
+  readonly refetch?: () => void;
   readonly scrap: boolean;
 }
 
@@ -94,9 +101,9 @@ export interface OnSubmitType {
   postType: string;
   pic?: (string | ArrayBuffer | null)[];
   images?: Blob[];
-  qnaAnswerId?: number;
+  qnaAnswerId?: string;
 
-  profileImg: string | ArrayBuffer | null;
+  profileUrl: string | ArrayBuffer | null;
   nickName: string;
   selectedJob: string;
 

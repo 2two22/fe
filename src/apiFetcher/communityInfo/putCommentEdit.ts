@@ -1,9 +1,9 @@
 import customAxios from '../customAxios';
 
-export const putFeedCommentEditAxios = async (token: string, commentId: number, comment: string) => {
+export const putFeedCommentEditAxios = async (token: string, commentId: string, comment: string) => {
   return await customAxios({
     method: 'put',
-    url: `/posts/comments/${commentId}/modify`,
+    url: `/community/posts/comments/${commentId}/modify`,
     headers: {
       Authorization: token,
       'Content-Type': 'application/json',
@@ -13,10 +13,10 @@ export const putFeedCommentEditAxios = async (token: string, commentId: number, 
   });
 };
 
-export const putQnaCommentEditAxios = async (token: string, commentId: number, comment: string) => {
+export const putQnaCommentEditAxios = async (token: string, commentId: string, comment: string) => {
   return await customAxios({
     method: 'put',
-    url: `/posts/qna-answers/qna-comments/${commentId}/modify`,
+    url: `/community/answers/comments/${commentId}`,
     headers: {
       Authorization: token,
       'Content-Type': 'application/json',

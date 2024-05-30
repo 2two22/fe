@@ -13,17 +13,17 @@ import { MainBtnPropsType } from './_Common.interface';
 export default function MainBtn({ onSubmit, content, size }: MainBtnPropsType) {
   const navigate = useNavigate();
 
-  const [postId, setPostId] = useState<number>(0);
+  const [postId, setPostId] = useState<String>();
   //reactQuery - mutation
   const { mutateAsync: mutateCreateRoom, data: chatroomUrl } = useCreateRoomMutation();
   const { mutateAsync: mutateCreatePost } = usePostCommunityMutation();
-  const { mutateAsync: mutateUpdatePost } = useUpdateCommunityMutation(postId);
+  const { mutateAsync: mutateUpdatePost } = useUpdateCommunityMutation(postId as string);
   const { mutateAsync: mutateCreateQnaAnswer } = useCreateAnswerMutation();
-  const { mutateAsync: mutateUpdateQnaAnswer } = useUpdateAnswerMutation(postId);
+  const { mutateAsync: mutateUpdateQnaAnswer } = useUpdateAnswerMutation(postId as string);
   const { mutateAsync: mutateUpdateUserInfo, isSuccess } = useUpdateUserInfoMutation();
   const { refetch: allChatroomRefetch } = useAllChatroomQuery();
   const { refetch: communityPostRefetch } = useCommunityPostQuery();
-  const { refetch: communityAnswerRefetch } = useCommunityAnswerQuery(postId);
+  const { refetch: communityAnswerRefetch } = useCommunityAnswerQuery(postId as string);
   const { refetch: myProfileRefetch } = useMyProfileQuery();
 
   const handleSubitData = async () => {
@@ -64,7 +64,7 @@ export default function MainBtn({ onSubmit, content, size }: MainBtnPropsType) {
           }
           break;
         case 'POST_UPDATE':
-          setPostId(onSubmit.postId as number);
+          setPostId(onSubmit.postId as string);
           // 게시글 업데이트 이미지 없음
           if (onSubmit.images && (onSubmit.images === null || onSubmit.images.length === 0)) {
             await mutateUpdatePost(
@@ -82,7 +82,7 @@ export default function MainBtn({ onSubmit, content, size }: MainBtnPropsType) {
             await mutateUpdatePost(
               toFormData({
                 postTypeInfo: onSubmit.postTypeInfo as postingInfoType,
-                postId: onSubmit.postId as number,
+                postId: onSubmit.postId as string,
                 title: onSubmit.title as string,
                 content: onSubmit.content as string,
                 postType: onSubmit.postType as string,
@@ -123,7 +123,7 @@ export default function MainBtn({ onSubmit, content, size }: MainBtnPropsType) {
           navigate('/community/all');
           break;
         case 'ANSWER_CREATE':
-          setPostId(onSubmit.postId as number);
+          setPostId(onSubmit.postId as string);
           // 답변생성 이미지 없음
           if (onSubmit.images && onSubmit.images.length === 0) {
             await mutateCreateQnaAnswer(
@@ -150,7 +150,7 @@ export default function MainBtn({ onSubmit, content, size }: MainBtnPropsType) {
           navigate(`/communityQADetail/${onSubmit.postId}`);
           break;
         case 'ANSWER_UPDATE':
-          setPostId(onSubmit.qnaAnswerId as number);
+          setPostId(onSubmit.qnaAnswerId as string);
           // 답변 업데이트 이미지 없음
           if (onSubmit.images && onSubmit.images.length === 0) {
             await mutateUpdateQnaAnswer(
@@ -187,7 +187,7 @@ export default function MainBtn({ onSubmit, content, size }: MainBtnPropsType) {
           onSubmit?.description?.trim().length === 0 ||
           onSubmit?.introduceMessage?.trim().length === 0 ||
           onSubmit?.content?.trim().length === 0 ||
-          onSubmit?.nickname?.trim().length === 0 ||
+          onSubmit?.nickName?.trim().length === 0 ||
           onSubmit?.isUnique === false) as boolean
       }
       onClick={handleSubitData}

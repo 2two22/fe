@@ -21,13 +21,13 @@ interface CommunityDetailPostProps {
 export default function CommunityDetailPost({ setQuestionUserId, setCommentCount }: CommunityDetailPostProps) {
   const { id: questionId } = useParams();
   const navigate = useNavigate();
-  const { data: questionData, isLoading: questionIsLoading, error: questionError, refetch, isRefetching, isSuccess } = useCommunityDetailQuery(Number(questionId));
+  const { data: questionData, isLoading: questionIsLoading, error: questionError, refetch, isRefetching, isSuccess } = useCommunityDetailQuery(String(questionId));
 
   // 사용자 정보 Recoil
   const logInUserInfo = useRecoilValue(loginUserInfo);
 
   const [userId, setUserId] = useState<number>();
-  const { mutate } = useFollowMutation(Number(userId), Number(questionId));
+  const { mutate } = useFollowMutation(Number(userId), questionId);
 
   useEffect(() => {
     setQuestionUserId && setQuestionUserId(questionData?.member.id);
@@ -76,8 +76,8 @@ export default function CommunityDetailPost({ setQuestionUserId, setCommentCount
                       navigate(`/otherProfile/${questionData?.member.id}/feed`);
                     }
                   }}
-                  src={S3_URL + (questionData?.member.profileImg as string)}
-                  alt={questionData?.member.nickname}
+                  src={S3_URL + (questionData?.member.profileUrl as string)}
+                  alt={questionData?.member.nickName}
                   className="aspect-square h-[58px] w-[58px] cursor-pointer rounded-full object-cover"
                 />
                 <div className="flex flex-col gap-1.5 pl-3">
@@ -92,7 +92,7 @@ export default function CommunityDetailPost({ setQuestionUserId, setCommentCount
                     }}
                     className="cursor-pointer text-xl font-bold"
                   >
-                    {questionData?.member.nickname}
+                    {questionData?.member.nickName}
                   </p>
                   <p className="text-[17px] opacity-50">{timeForToday(questionData?.createdAt as string)}</p>
                 </div>
@@ -127,12 +127,11 @@ export default function CommunityDetailPost({ setQuestionUserId, setCommentCount
             <ImagePeek setIsPicPopUp={setIsPicPopUp} imgPeek={questionData.imageUrls.map((imgeUrl) => S3_URL + imgeUrl)} />
           )}
           <LikeCommentScrap
-            scrap={questionData?.scrap as boolean}
             like={questionData?.like as boolean}
             postType={questionData?.postType as postType}
             likeCount={questionData?.likeCount as number}
             commentCount={questionData?.commentCount as number}
-            postId={questionData?.id as number}
+            postId={questionData?.id as string}
           />
         </>
       )}
