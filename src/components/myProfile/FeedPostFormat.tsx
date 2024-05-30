@@ -48,9 +48,9 @@ export default function FeedPostFormat({ resultData, userData, refetch, profileP
               onClick={(e) => {
                 e.preventDefault();
                 if (data.postType === 'QNA') {
-                  navigate(`/communityQADetail/${data.postId}`);
+                  navigate(`/communityQADetail/${data.id}`);
                 } else {
-                  navigate(`/communityFeedDetail/${data.postId}`);
+                  navigate(`/communityFeedDetail/${data.id}`);
                 }
               }}
               key={data.postId}
@@ -127,7 +127,7 @@ export default function FeedPostFormat({ resultData, userData, refetch, profileP
                 </div>
               </div>
               {data.imageUrls.length > 0 && data.imageUrls[0] !== null && <ImagePeek setIsPicPopUp={setIsPicPopUp} imgPeek={data.imageUrls.map((imgeUrl: any) => S3_URL + imgeUrl)} />}
-              <LikeCommentScrap refetch={refetch} scrap={data.scrap} like={data.like} postType={data.postType} likeCount={data.likeCount} commentCount={data.commentCount} postId={data.postId} />
+              <LikeCommentScrap refetch={refetch} like={data.like} postType={data.postType} likeCount={data.likeCount} commentCount={data.commentCount} postId={data.postId} />
             </li>
           ))
         ) : (

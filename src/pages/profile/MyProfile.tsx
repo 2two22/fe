@@ -111,7 +111,7 @@ export default function MyProfile() {
           isLoading={myProfileIsLoading}
         />
         <MyProfileInfo
-          level={myProfileData?.level as number}
+          scrap={myProfileData?.scrap as number}
           followers={myProfileData?.numberOfFollowers as number}
           follows={myProfileData?.numberOfFollows as number}
           posts={myProfileData?.numberOfPosts as number}

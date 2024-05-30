@@ -53,12 +53,12 @@ export default function ScrapPostFormat({ refetch, userData, resultData, myProfi
               onClick={(e) => {
                 e.preventDefault();
                 if (data.postType === 'QNA') {
-                  navigate(`/communityQADetail/${data.postId}`);
+                  navigate(`/communityQADetail/${data.id}`);
                 } else {
-                  navigate(`/communityFeedDetail/${data.postId}`);
+                  navigate(`/communityFeedDetail/${data.id}`);
                 }
               }}
-              key={data.postId}
+              key={data.id}
               className="mb-6 flex cursor-pointer flex-col items-center gap-4 rounded-[20px] bg-midIvory dark:bg-midNavy"
             >
               <div className="flex w-full flex-col gap-4 p-4 text-lightText dark:text-white">
@@ -131,7 +131,7 @@ export default function ScrapPostFormat({ refetch, userData, resultData, myProfi
                 </div>
               </div>
               {data.imageUrls.length > 0 && data.imageUrls[0] !== null && <ImagePeek setIsPicPopUp={setIsPicPopUp} imgPeek={data.imageUrls.map((imgeUrl: string) => S3_URL + imgeUrl)} />}
-              <LikeCommentScrap refetch={refetch} like={data.like} postType={data.postType} likeCount={data.likeCount} commentCount={data.commentCount} postId={data.postId} />
+              <LikeCommentScrap refetch={refetch} like={data.like} postType={data.postType} likeCount={data.likeCount} commentCount={data.commentCount} postId={data.id} />
             </li>
           ))
         ) : (

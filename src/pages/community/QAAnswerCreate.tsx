@@ -16,7 +16,7 @@ export default function QAAnswerCreate() {
   console.log(postId);
 
   // QNA 질문 글 정보
-  const { isLoading, data, refetch } = useCommunityDetailQuery(Number(postId));
+  const { isLoading, data, refetch } = useCommunityDetailQuery(String(postId));
   const [qnaData, setQnaData] = useState<getCommunityDetailType>(data as getCommunityDetailType);
   useEffect(() => {
     refetch().then(() => setQnaData(data as getCommunityDetailType));
@@ -25,7 +25,7 @@ export default function QAAnswerCreate() {
   // 보낼 게시글 전체 정보
   const [postInfo, setPostInfo] = useState<Partial<QnaAnswerType>>({
     postTypeInfo: 'ANSWER_CREATE',
-    postId: Number(postId),
+    postId: String(postId),
     content: '',
     images: [],
   });

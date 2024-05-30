@@ -165,7 +165,7 @@ export interface CommunityPostType {
  * Partial<QnaAnswerType>과 같이 사용해야 함/*/
 export interface QnaAnswerType {
   readonly postTypeInfo: postingInfoType;
-  readonly postId: number;
+  readonly postId: string;
   readonly qnaAnswerId: number;
   readonly content: string;
   readonly images: null | Blob[] | string[];
@@ -173,7 +173,7 @@ export interface QnaAnswerType {
 
 export interface CommentContentType {
   readonly reComments: any;
-  readonly id: number;
+  readonly id: string;
   readonly content: string;
   readonly createdAt: string;
   readonly isPinned: boolean;

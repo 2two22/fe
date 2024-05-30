@@ -68,7 +68,7 @@ export interface memberType {
 /** getMyScrapList - ScrpListType의 content 타입 */
 export interface ScrapPostContentType {
   readonly createdAt: string;
-  readonly postId: string;
+  readonly id: string;
   readonly commentCount: number;
   readonly content: string;
   readonly title: string;
@@ -161,7 +161,7 @@ export interface FeedPostContentPropsType {
   readonly createdAt: string;
   readonly follow: boolean;
   readonly hitCount: number;
-  readonly postId: number;
+  readonly id: string;
   readonly imageUrls: null[] | string[];
   readonly like: boolean;
   readonly likeCount: number;
