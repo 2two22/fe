@@ -24,6 +24,7 @@ import { loginUserInfo } from '../../store/recoil/user';
 import LazyLoadImage from '../../utils/LazyLoadImage';
 import { CommunityCommentType } from '../community/_Community.interface';
 import { CommunityFeedCommentFormPropsType } from './_FeedDetail.interface';
+import '@sandstreamdev/react-swipeable-list/dist/styles.css';
 
 export default function CommunityCommentForm({ type, answerId, questionUserId, commentCount, refetch }: CommunityFeedCommentFormPropsType) {
   const { id: postId } = useParams();
@@ -187,38 +188,6 @@ export default function CommunityCommentForm({ type, answerId, questionUserId, c
                             }
                           : undefined
                       }
-                      swipeRight={
-                        questionUserId === logInUserInfo?.id
-                          ? {
-                              content: (
-                                <div className="flex h-full w-full items-center justify-start bg-pointGreen p-4 text-white dark:bg-pointGreen">
-                                  {/* <span className="flex items-center gap-2 text-lg">
-                                    고정하기
-                                    <BsFillPinAngleFill />
-                                  </span> */}
-                                </div>
-                              ),
-                              action: () => {
-                                console.log('Pin item:', content.id);
-                                setCommentId(String(content.id));
-                                if (content.isPinned) {
-                                  if (type === 'FEED') {
-                                    deleteFeedCommentPinMutate();
-                                    return;
-                                  } else {
-                                    deleteQnaCommentPinMutate();
-                                    return;
-                                  }
-                                }
-                                if (type === 'FEED') {
-                                  feedCommentPinMutate();
-                                } else {
-                                  qnaCommentPinMutate();
-                                }
-                              },
-                            }
-                          : undefined
-                      }
                     >
                       <li className="flex min-h-[60px] w-full gap-2 bg-midIvory px-4 dark:bg-midNavy">
                         <LazyLoadImage
@@ -233,12 +202,6 @@ export default function CommunityCommentForm({ type, answerId, questionUserId, c
                               <div className="text-[15px] font-semibold">{content.user.nickName}</div>
                               <BsDot className="opacity-70" />
                               <div className="mr-2 text-[14px] opacity-70">{content.createdAt}</div>
-                              {content.isPinned && (
-                                <div className="itmes-center flex justify-center gap-1 rounded-2xl bg-greyBeige px-[5px] py-1 text-[14px] dark:bg-sky">
-                                  <BsFillPinAngleFill />
-                                  고정됨
-                                </div>
-                              )}
                             </div>
                           </div>
                           <div className="flex justify-between">

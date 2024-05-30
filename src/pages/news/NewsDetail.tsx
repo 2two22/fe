@@ -103,6 +103,10 @@ export default function NewsDetail() {
               </div>
             </div>
           </div>
+          <Scrap
+            scrap={data?.scrap as boolean}
+            newsId={data?.id as number}
+          />
         </>
       )}
     </section>

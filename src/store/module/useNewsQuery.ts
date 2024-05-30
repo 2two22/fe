@@ -34,14 +34,14 @@ export function useNewsScrapMutation(newsId: number, userId: number) {
   const loginUser = useRecoilValue(loginUserInfo);
   const { refetch: myScrapRefetch } = useMyScrapsQuery('POST_DATE');
   const { refetch: detailRefetch } = useNewsDetailQuery(newsId);
- // const { refetch: myPageRefetch } = useProfilePostQuery(userId, postType);
+  // const { refetch: myPageRefetch } = useMyScrapsQuery(userId, postType);
   return useMutation(() => postCommunityScrapAxios(loginUser?.token as string, newsId), {
     onError: (err) => {
       console.log(err);
     },
     onSuccess: () => {
       detailRefetch();
-  //    myPageRefetch();
+      // myPageRefetch();
       myScrapRefetch();
       console.log('게시물 스크랩 상태 변경 반영됨');
     },
