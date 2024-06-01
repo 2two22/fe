@@ -58,7 +58,7 @@ export default function Notification() {
 
   return (
     <div className="mb-4 flex flex-col gap-4 rounded-3xl bg-midIvory p-5 dark:bg-midNavy">
-      <div className="flex items-center gap-3 text-[22px] font-semibold dark:border-[#ffffff50]">
+      {/* <div className="flex items-center gap-3 text-[22px] font-semibold dark:border-[#ffffff50]">
         <BsBellFill size="23" />
         <p>알림 설정</p>
       </div>
@@ -87,7 +87,7 @@ export default function Notification() {
           <p className="grow">게시글 알림</p>
           <Toggle isOn={notification.post} />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

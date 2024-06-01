@@ -11,7 +11,7 @@ import MyProfileMenu from '../../components/myProfile/MyProfileMenu';
 import { S3_URL } from '../../constant/union';
 import { useMyProfileQuery, useMyScrapsQuery } from '../../store/module/useMyProfileQuery';
 import { useProfilePostQuery } from '../../store/module/useProfilePostQuery';
-import { MyProfileType, ScrapPostContentType } from '../../components/myProfile/_MyProfile.interface';
+import { MyProfileType, NewsDetailType, ScrapPostContentType } from '../../components/myProfile/_MyProfile.interface';
 import { OrderType, SortType } from '../../components/community/_Community.interface';
 import ProfileSort, { ProfilePostSortType } from '../../components/myProfile/ProfileSort';
 import { useRecoilState } from 'recoil';
@@ -59,9 +59,6 @@ export default function MyProfile() {
     isLoading: myScrapsIsLoading,
     error: myScrapsError,
     isFetching: myScrapsIsFetching,
-    isFetchingNextPage: myScrapsIsFetchingNextPage,
-    fetchNextPage: myScrapsFetchNextPage,
-    hasNextPage: myScrapsHasNextPage,
     refetch: myScrapsRefetch,
   } = useMyScrapsQuery(postView !== 'scrap' ? 'POST_DATE' : scrapSortAndOrder.sort, scrapSortAndOrder.order);
 
@@ -80,7 +77,7 @@ export default function MyProfile() {
   const { ref, inView } = useInView();
 
   useEffect(() => {
-    if (postView === 'scrap' && inView && myScrapsHasNextPage && !myScrapsIsFetching && !myScrapsIsFetchingNextPage) myScrapsFetchNextPage();
+    // if (postView === 'scrap' && inView) myScrapsFetchNextPage();
     if ((postView === 'qna' || postView === 'feed') && inView && profilePostHasNextPage && !profilePostIsFetching && !profilePostIsFetchingNextPage) profilePostFetchNextPage();
   }, [inView]);
 
@@ -127,7 +124,7 @@ export default function MyProfile() {
             refetch={myScrapsRefetch}
             myProfileRefetch={MyProfileRefetch}
             userData={myProfileData as MyProfileType}
-            resultData={myScrapsData?.pages.flatMap((page) => page.content) as ScrapPostContentType[]}
+            resultData={myScrapsData?.content as NewsDetailType[]}
           />
         )}
       </div>

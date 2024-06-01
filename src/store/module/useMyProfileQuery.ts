@@ -58,12 +58,7 @@ export function useMyFollowsQuery() {
 export function useMyScrapsQuery(sort?: string, order?: OrderType) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
-  return useInfiniteQuery(['myScraps', sort, order], ({ pageParam = 0 }) => getMyScrapList(loginUser?.token as string, pageParam, sort, order), {
-    getNextPageParam: (prevData: any, allPages) => {
-      const lastPage = prevData.last;
-      const nextPage = allPages.length;
-      return lastPage ? undefined : nextPage;
-    },
+  return useQuery(['myScraps'], ({ pageParam = 0 }) => getMyScrapList(loginUser?.token as string, pageParam, sort, order), {
     enabled: false,
     refetchOnMount: true,
     refetchOnReconnect: true,

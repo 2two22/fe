@@ -5,7 +5,7 @@ import { TfiWrite } from 'react-icons/tfi';
 import { CheckModalPropsType } from './_Common.interface';
 import { SetNotificationType } from '../SignUp/_SignUp.interface';
 
-export default function CheckBoxModal({ checkModal, setCheckModal, getModalAnswer, action }: CheckModalPropsType) {
+export default function CheckBoxModal({ checkModal, setCheckModal, action }: CheckModalPropsType) {
   // const [open, setOpen] = useState(true)
   const cancelButtonRef = useRef(null);
   const [notification, setNotification] = useState<SetNotificationType>({
@@ -83,7 +83,7 @@ export default function CheckBoxModal({ checkModal, setCheckModal, getModalAnswe
                     className="inline-flex w-full justify-center rounded-full bg-[#dc2626] px-3 py-2 text-sm font-semibold text-white shadow-sm  hover:bg-[#ef4444] sm:ml-3 sm:w-auto"
                     onClick={() => {
                       setCheckModal(false);
-                      getModalAnswer(notification);
+                      //getModalAnswer(notification);
                       action && action();
                     }}
                   >
@@ -94,7 +94,7 @@ export default function CheckBoxModal({ checkModal, setCheckModal, getModalAnswe
                     className="mt-3 inline-flex w-full justify-center rounded-full bg-white px-3 py-2 text-sm font-semibold text-[#111827] shadow-sm outline-none ring-1 ring-inset ring-[#d1d5db] hover:bg-[#f9fafb] sm:mt-0 sm:w-auto"
                     onClick={() => {
                       setCheckModal(false);
-                      getModalAnswer({ post: true, follow: true });
+                      //getModalAnswer({ post: true, follow: true });
                       action && action();
                     }}
                     ref={cancelButtonRef}

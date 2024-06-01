@@ -32,17 +32,17 @@ export default function MyProfileInfo({ scrap, followers, follows, posts, isLoad
             <div>{posts}</div>
             <div className="mt-2 text-[18px] font-medium">게시글</div>
           </div>
-          <div onClick={followers > 0 ? handleClickFollower : undefined} className={'flex flex-col items-center justify-around text-[22px] font-bold ' + (followers > 0 ? 'cursor-pointer' : '')}>
+          <div onClick={ handleClickFollower } className={'flex flex-col items-center justify-around text-[22px] font-bold ' + (followers > 0 ? 'cursor-pointer' : '')}>
             <div>{followers}</div>
             <div className="mt-2 text-[18px] font-medium">팔로워</div>
           </div>
-          <div onClick={follows > 0 ? handleClickFollow : undefined} className={'flex flex-col items-center justify-around text-[22px] font-bold ' + (follows > 0 ? 'cursor-pointer' : '')}>
+          <div onClick={handleClickFollow} className={'flex flex-col items-center justify-around text-[22px] font-bold ' + (follows > 0 ? 'cursor-pointer' : '')}>
             <div>{follows}</div>
             <div className="mt-2 text-[18px] font-medium">팔로우</div>
           </div>
           <div className="flex flex-col items-center justify-around text-[22px] font-bold">
             <div>{scrap}</div>
-            <div className="mt-2 text-[18px] font-medium">성장레벨</div>
+            <div className="mt-2 text-[18px] font-medium">뉴스 스크랩</div>
           </div>
         </div>
         <div onClick={() => navigate('/myProfileEdit')} className="flex h-[55px] w-full text-[18px] font-semibold">

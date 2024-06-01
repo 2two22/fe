@@ -87,17 +87,33 @@ export interface ScrapPostContentType {
   readonly postRegisterMemberStatus: string;
 }
 
+export interface NewsDetailType {
+  readonly id: number;
+  readonly registeredAt: string;
+  readonly title: string;
+  readonly link: string;
+  readonly scrap: boolean;
+  readonly content: string;
+  readonly summaryContent: string;
+  readonly mainImgUrl: string;
+  readonly company: string;
+  readonly journalistOriginalNames: string[];
+  readonly journalistNames: string[];
+  readonly keywords: string[];
+  readonly hitCount: number;
+}
+
 /** getMyScrapList - 나의 스크랩 리스트 가져올 때 사용하는 response 타입 */
 export interface ScrapListType {
-  readonly content: ScrapPostContentType[];
+  readonly content: NewsDetailType[];
   readonly empty: boolean;
   readonly first: boolean;
   readonly last: boolean;
   readonly number: number;
-  readonly numberOfElements: number;
-  readonly pageable: Partial<CommunityPostPageableType>;
-  readonly size: number;
-  readonly sort: PostSortType;
+  // readonly numberOfElements: number;
+  // readonly pageable: Partial<CommunityPostPageableType>;
+  // readonly size: number;
+  // readonly sort: PostSortType;
 }
 
 /** MyProfileHeader - 나의 프로필 헤더에 사용하는 props 타입 */
