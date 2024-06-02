@@ -4,7 +4,7 @@ import customAxios from '../customAxios';
 const getNewsDetailAxios = async (token: string, id: number): Promise<NewsDetailType> => {
   return await customAxios({
     method: 'get',
-    url: `/news/detail/${String(id)}`,
+    url: `/News/news/detail/${String(id)}`,
     headers: {
       Authorization: token,
     },

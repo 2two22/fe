@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { timeForToday } from '../../utils/timeForToday';
 import ScrollToTopBtn from '../../components/common/ScrollToTopBtn';
 import Scrap from '../../components/common/Scrap';
+import { FaceSmileIcon } from '@heroicons/react/24/outline';
 
 export default function NewsDetail() {
   const [isScroll, setIsScroll] = useState(false);
@@ -87,12 +88,18 @@ export default function NewsDetail() {
                 className="absolute flex w-full flex-col items-center gap-3 bg-white p-8 text-[24px] font-semibold leading-8 "
               >
                 <div onClick={handleTitleClick} dangerouslySetInnerHTML={{ __html: data.title }} className="z-40 text-white"></div>
-                <div className="flex w-full flex-col justify-between text-[13px] text-white opacity-60 ">
+                <div className="flex w-full flex-col justify-between text-[13px] text-white xx ">
                   <div className="flex gap-3">
                     <div>{data.company}</div>
                     <div>{timeForToday(data.registeredAt)}</div>
                   </div>
                   <div>{data.journalistOriginalNames}</div>
+                  <div>
+                  <Scrap
+            scrap={false as boolean}
+            newsId={data?.id as number}
+          />
+                  </div>
                 </div>
                 <div
                   onClick={(e) => e.stopPropagation()}
@@ -103,10 +110,6 @@ export default function NewsDetail() {
               </div>
             </div>
           </div>
-          <Scrap
-            scrap={data?.scrap as boolean}
-            newsId={data?.id as number}
-          />
         </>
       )}
     </section>

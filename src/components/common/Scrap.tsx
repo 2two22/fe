@@ -8,12 +8,15 @@ import { ScrapPropsType } from './_Common.interface';
 export default function Scrap({ newsId, refetch, scrap }: ScrapPropsType) {
   // 사용자 정보 Recoil
   const logInUserInfo = useRecoilValue(loginUserInfo);
+  console.log("scrp");
+  console.log(scrap);
 
   // 리액트 쿼리
   const { mutateAsync: scrapMutate } = useNewsScrapMutation(newsId, logInUserInfo?.id as number);
 
   return (
-    <div className="flex h-[54px] w-full items-center justify-between rounded-b-[20px] bg-[#A49C7C] p-4 text-base text-white dark:bg-[#2C2E34]">
+    <div className="flex w-full flex-col justify-between text-[13px] text-white xx">
+   <div className="flex gap-6">
       <div
         className="flex cursor-pointer items-center justify-end gap-2"
         onClick={async (e) => {
@@ -22,11 +25,16 @@ export default function Scrap({ newsId, refetch, scrap }: ScrapPropsType) {
           refetch && refetch();
         }}
       >
-        <svg stroke="currentColor" fill="currentColor" strokeWidth="0" version="1" viewBox="0 0 48 48" enableBackground="new 0 0 48 48" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
-          <path fill={scrap ? `#f9e288` : '#ffffff80'} d="M37,43l-13-6l-13,6V9c0-2.2,1.8-4,4-4h18c2.2,0,4,1.8,4,4V43z"></path>
-        </svg>
-        {`스크랩`}
+        {/* 여기서 아이콘을 추가합니다 */}
+        {scrap ? (
+          <BsFillHandThumbsUpFill size={20} />
+        ) : (
+          <BsFillHandThumbsUpFill className="opacity-50 brightness-[5]" size={20} />
+        )}
+        {/* 스크랩 텍스트 */}
+        스크랩
       </div>
-    </div>
+    </div> 
+  </div>
   );
 }

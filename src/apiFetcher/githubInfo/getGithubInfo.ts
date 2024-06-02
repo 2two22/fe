@@ -4,7 +4,7 @@ import customAxios from '../customAxios';
 const getGithubInfoAxios = async (token: string): Promise<githubInfoType> => {
   return await customAxios({
     method: 'get',
-    url: '/github',
+    url: '/Github/github',
     headers: {
       Authorization: token,
     },

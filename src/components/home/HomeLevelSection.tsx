@@ -19,9 +19,9 @@ export default function HomeLevelSection({ levelCode, remainCommitCountNextLevel
               <div className="text-[26px] font-bold">{levelCode?.replace('_', ' ')}</div>
               <div className="mt-5 text-[20px]">{levelCode?.slice(-2)}</div>
             </div>
-            <div className="h-[100px] w-[100px]">
-              <img className="scale-[1.2]" src={S3_URL + 'levels/lv1.png'} alt={levelCode} />
-            </div>
+            <div className="h-[100px] w-[100px] rounded-full overflow-hidden">
+  <img className="scale-[1.2] h-full w-full object-cover" src={S3_URL + 'levels/lv1.png'} alt={levelCode} />
+</div>
           </div>
         </div>
         <div className="my-2 flex justify-center text-[17px] font-bold leading-6">

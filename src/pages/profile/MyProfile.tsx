@@ -16,6 +16,7 @@ import { OrderType, SortType } from '../../components/community/_Community.inter
 import ProfileSort, { ProfilePostSortType } from '../../components/myProfile/ProfileSort';
 import { useRecoilState } from 'recoil';
 import { loginUserInfo } from '../../store/recoil/user';
+import { NewsListType } from '../../components/news/_News.interface';
 
 export default function MyProfile() {
   const initialPostView = useParams();
@@ -108,7 +109,7 @@ export default function MyProfile() {
           isLoading={myProfileIsLoading}
         />
         <MyProfileInfo
-          scrap={myProfileData?.scrap as number}
+          scrap={myProfileData?.numberOfScraps as number}
           followers={myProfileData?.numberOfFollowers as number}
           follows={myProfileData?.numberOfFollows as number}
           posts={myProfileData?.numberOfPosts as number}
@@ -124,7 +125,7 @@ export default function MyProfile() {
             refetch={myScrapsRefetch}
             myProfileRefetch={MyProfileRefetch}
             userData={myProfileData as MyProfileType}
-            resultData={myScrapsData?.content as NewsDetailType[]}
+            resultData={myScrapsData as NewsDetailType[]}
           />
         )}
       </div>

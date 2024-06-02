@@ -34,6 +34,7 @@ export interface MyProfileType {
   readonly numberOfFollowers: number;
   readonly numberOfFollows: number;
   readonly numberOfPosts: number;
+  readonly numberOfScraps: number;
   readonly profileUrl: string;
   readonly isFollowing: boolean;
   readonly isReader: boolean;

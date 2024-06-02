@@ -10,6 +10,7 @@ import { useFollowMutation } from '../../store/module/useCommunityQuery';
 import { MyProfileType, NewsDetailType, ScrapPostContentType } from './_MyProfile.interface';
 import LazyLoadImage from '../../utils/LazyLoadImage';
 import NewsPosts from '../../components/news/NewsPosts';
+import { NewsListType } from '../news/_News.interface';
 interface ScrapPostFormatPropsType {
   refetch: () => void;
   userData: MyProfileType;
