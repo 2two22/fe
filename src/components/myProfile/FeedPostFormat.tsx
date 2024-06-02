@@ -127,7 +127,7 @@ export default function FeedPostFormat({ resultData, userData, refetch, profileP
                 </div>
               </div>
               {data.imageUrls.length > 0 && data.imageUrls[0] !== null && <ImagePeek setIsPicPopUp={setIsPicPopUp} imgPeek={data.imageUrls.map((imgeUrl: any) => S3_URL + imgeUrl)} />}
-              <LikeCommentScrap refetch={refetch} like={data.like} postType={data.postType} likeCount={data.likeCount} commentCount={data.commentCount} postId={data.postId} />
+              <LikeCommentScrap refetch={refetch} like={data.like} postType={data.postType} likeCount={data.likeCount} commentCount={data.commentCount} postId={data.id} />
             </li>
           ))
         ) : (

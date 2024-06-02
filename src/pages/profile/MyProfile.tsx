@@ -91,10 +91,10 @@ export default function MyProfile() {
     if (myProfileData && (postView === 'feed' || postView === 'qna')) profilePostRefetch();
   }, [postView, profilePostIsLoading, myProfileIsLoading]);
 
-  //에러처리
-  // if (myProfileError || myScrapsError || profilePostError) {
-  //   navigate('/NotFound');
-  // }
+  
+  if (myProfileError || myScrapsError || profilePostError) {
+    navigate('/NotFound');
+  }
 
   return (
     <section>

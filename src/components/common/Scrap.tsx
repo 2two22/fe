@@ -1,4 +1,4 @@
-import { BsFillHandThumbsUpFill } from 'react-icons/bs';
+import { IoIosBookmark } from "react-icons/io";
 import { FcLike, FcSms, FcVoicePresentation } from 'react-icons/fc';
 import { useRecoilValue } from 'recoil';
 import { useNewsScrapMutation } from '../../store/module/useNewsQuery';
@@ -27,9 +27,9 @@ export default function Scrap({ newsId, refetch, scrap }: ScrapPropsType) {
       >
         {/* 여기서 아이콘을 추가합니다 */}
         {scrap ? (
-          <BsFillHandThumbsUpFill size={20} />
+          <IoIosBookmark style={{ color: 'yellow' }} size={27} />
         ) : (
-          <BsFillHandThumbsUpFill className="opacity-50 brightness-[5]" size={20} />
+          <IoIosBookmark className="opacity-50 brightness-[5]" size={27} />
         )}
         {/* 스크랩 텍스트 */}
         스크랩

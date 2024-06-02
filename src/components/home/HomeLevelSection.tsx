@@ -20,7 +20,7 @@ export default function HomeLevelSection({ levelCode, remainCommitCountNextLevel
               <div className="mt-5 text-[20px]">{levelCode?.slice(-2)}</div>
             </div>
             <div className="h-[100px] w-[100px] rounded-full overflow-hidden">
-  <img className="scale-[1.2] h-full w-full object-cover" src={S3_URL + 'levels/lv1.png'} alt={levelCode} />
+  <img className="scale-[1.2] h-full w-full object-cover" src={S3_URL + levelImg} alt={levelCode} />
 </div>
           </div>
         </div>

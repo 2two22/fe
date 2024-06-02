@@ -96,7 +96,7 @@ export default function NewsDetail() {
                   <div>{data.journalistOriginalNames}</div>
                   <div>
                   <Scrap
-            scrap={false as boolean}
+            scrap={true as boolean}
             newsId={data?.id as number}
           />
                   </div>
