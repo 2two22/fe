@@ -5,6 +5,7 @@ import getNewsList from '../../apiFetcher/newsInfo/getNewsList';
 import { loginUserInfo } from '../recoil/user';
 import { useMyScrapsQuery } from './useMyProfileQuery';
 import postCommunityScrapAxios from '../../apiFetcher/communityInfo/postCommunityScrap';
+import { useMyProfileQuery } from './useMyProfileQuery';
 
 export function useNewsQuery(inputKeyword: string, sort: boolean, order: boolean, filterKeywords: string) {
   //리코일
@@ -34,14 +35,14 @@ export function useNewsScrapMutation(newsId: number, userId: number) {
   const loginUser = useRecoilValue(loginUserInfo);
   const { refetch: myScrapRefetch } = useMyScrapsQuery('POST_DATE');
   const { refetch: detailRefetch } = useNewsDetailQuery(newsId);
-  // const { refetch: myPageRefetch } = useMyScrapsQuery(userId, postType);
+  const { refetch: userProfileRefetch } = useMyProfileQuery();
   return useMutation(() => postCommunityScrapAxios(loginUser?.token as string, newsId), {
     onError: (err) => {
       console.log(err);
     },
     onSuccess: () => {
       detailRefetch();
-      // myPageRefetch();
+      userProfileRefetch();
       myScrapRefetch();
       console.log('게시물 스크랩 상태 변경 반영됨');
     },

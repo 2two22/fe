@@ -96,7 +96,7 @@ export default function NewsDetail() {
                   <div>{data.journalistOriginalNames}</div>
                   <div>
                   <Scrap
-            scrap={true as boolean}
+            scrap={data?.bookmarked as boolean}
             newsId={data?.id as number}
           />
                   </div>

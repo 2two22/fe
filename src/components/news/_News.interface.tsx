@@ -4,7 +4,7 @@ export interface NewsDetailType {
   readonly registeredAt: string;
   readonly title: string;
   readonly link: string;
-  readonly scrap: boolean;
+  readonly bookmarked: boolean;
   readonly content: string;
   readonly summaryContent: string;
   readonly mainImgUrl: string;
