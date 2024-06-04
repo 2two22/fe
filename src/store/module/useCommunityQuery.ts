@@ -127,6 +127,7 @@ export function useFollowMutation(userId: number, postId?: string) {
   const { refetch: detailRefetch } = useCommunityDetailQuery(String(postId));
   const { refetch: myScrapRefetch } = useMyScrapsQuery();
   const { refetch: qnaAnswerRefetch } = useCommunityAnswerQuery(String(postId));
+  const { refetch: myProfileRefetch } = useMyProfileQuery();
   return useMutation(() => postUserFollow(loginUser?.token as string, userId), {
     onError: (err) => {
       console.log(err);
@@ -136,6 +137,7 @@ export function useFollowMutation(userId: number, postId?: string) {
       myScrapRefetch();
       myFollowsRefetch();
       myFollowersRefetch();
+      myProfileRefetch();
       if (postId) {
         detailRefetch();
         qnaAnswerRefetch();

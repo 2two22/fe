@@ -97,7 +97,7 @@ export default function CommunityDetailPost({ setQuestionUserId, setCommentCount
                   <p className="text-[17px] opacity-50">{timeForToday(questionData?.createdAt as string)}</p>
                 </div>
               </div>
-              {questionData?.member.id !== logInUserInfo?.id && questionData.member.status !== 'WITHDREW' && (
+              {/* {questionData?.member.id !== logInUserInfo?.id && questionData.member.status !== 'WITHDREW' && (
                 <div className="text-end font-bold">
                   <div onClick={(e) => handleClickFollow(e, Number(questionData?.member.id))} className="flex h-full cursor-pointer items-center justify-end gap-3 whitespace-nowrap">
                     {questionData?.follow ? (
@@ -113,7 +113,7 @@ export default function CommunityDetailPost({ setQuestionUserId, setCommentCount
                     )}
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
             <div className="flex text-[16px] font-semibold">
               <div className="rounded-[30px] bg-greyBeige px-3 py-2 text-[14px] dark:bg-sky">{`${questionData?.postType === 'FEED' ? '개발 피드' : 'Q & A 피드'}`}</div>

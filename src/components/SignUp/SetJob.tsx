@@ -39,10 +39,10 @@ export default function SetJob() {
   //   setNotification(obj);
   // };
 
-  // const onClickHandler = async () => {
-  //   setCheckModal(true);
-  //   console.log(userInfo);
-  // };
+  const onClickHandler = async () => {
+    setCheckModal(true);
+    console.log(userInfo);
+  };
 
   const action = async () => {
     const userResult = toFormDataOnUserInfo(userInfo);
@@ -75,6 +75,14 @@ export default function SetJob() {
               className="rounded-full border-[2px] border-pointGreen bg-pointGreen py-2 px-5 text-lg text-white drop-shadow-2xl transition-all hover:border-white  hover:dark:border-white"
             >
               이전
+            </button>
+            <button
+              onClick={onClickHandler}
+              disabled={!(userInfo.job.length > 0)}
+              type="button"
+              className="rounded-full border-[2px] border-pointGreen bg-pointGreen py-2 px-5 text-lg text-white drop-shadow-2xl transition-all hover:border-white disabled:opacity-0  hover:dark:border-white"
+            >
+              완료
             </button>
           </div>
         </div>

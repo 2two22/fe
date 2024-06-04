@@ -51,10 +51,10 @@ export default function OtherProfileInfo({ numberOfPosts, numberOfFollowers, num
             <div>{numberOfFollows}</div>
             <div className="mt-2 text-[18px] font-medium">팔로우</div>
           </div>
-          <div className="flex flex-col items-center justify-around text-[22px] font-bold">
+          {/* <div className="flex flex-col items-center justify-around text-[22px] font-bold">
             <div>{level}</div>
             <div className="mt-2 text-[18px] font-medium">성장레벨</div>
-          </div>
+          </div> */}
         </div>
         {memberStatus !== 'WITHDREW' && (
           <div onClick={handleFollowClick} className="flex h-[55px] w-full text-[18px] font-semibold">

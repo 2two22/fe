@@ -93,7 +93,7 @@ export default function FeedPostFormat({ resultData, userData, refetch, profileP
                       <p className="text-[17px] opacity-50">{timeForToday(data.createdAt)}</p>
                     </div>
                   </div>
-                  {userData.id !== logInUserInfo?.id ||
+                  {/* {userData.id !== logInUserInfo?.id ||
                     userData.status !== 'WITHDREW' ||
                     (memberStatus !== 'WITHDREW' && (
                       <div className="text-end font-bold">
@@ -116,7 +116,8 @@ export default function FeedPostFormat({ resultData, userData, refetch, profileP
                           )}
                         </div>
                       </div>
-                    ))}
+                    ))
+                    } */}
                 </div>
                 <div className="flex text-[16px] font-semibold">
                   <div className="rounded-[30px] bg-greyBeige px-3 py-2 text-[14px] dark:bg-sky">{`${data.postType === 'FEED' ? '개발 피드' : 'Q & A 피드'}`}</div>
