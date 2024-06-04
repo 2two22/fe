@@ -23,7 +23,7 @@ export default function QAAnswerEdit() {
   console.log(answerValue);
 
   // QNA 질문 글 정보
-  const { isLoading, data, refetch } = useCommunityDetailQuery(Number(postId));
+  const { isLoading, data, refetch } = useCommunityDetailQuery(String(postId));
   const [questionInfo, setQuestionInfo] = useState({
     title: data?.title,
     content: data?.content,
@@ -36,7 +36,7 @@ export default function QAAnswerEdit() {
   // 보낼 게시글 전체 정보
   const [postInfo, setPostInfo] = useState<Partial<QnaAnswerType>>({
     postTypeInfo: 'ANSWER_UPDATE',
-    postId: Number(postId),
+    postId: String(postId),
     qnaAnswerId: Number(answerId),
     content: answerValue?.content,
     images: answerValue?.images,
