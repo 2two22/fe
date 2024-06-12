@@ -81,7 +81,6 @@ export default function OtherProfile() {
           memberStatus={data?.memberStatus as string}
         />
         <OtherProfileMenu id={id} postView={postView} setPostView={setPostView} />
-        <ProfileSort postView={postView} setSortAndOrder={setSortAndOrder} sortAndOrder={sortAndOrder} />
         <FeedPostFormat
           memberStatus={data?.memberStatus as string}
           profilePostIsLoading={profilePostIsLoading}

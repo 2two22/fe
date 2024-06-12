@@ -20,8 +20,8 @@ export default function CommunityQADetailAnswer({ isCommentOpen, setIsCommentOpe
   const { id: postId } = useParams();
   const navigate = useNavigate();
   const [isMenu, setIsMenu] = useState<boolean>();
-  const [activeComment, setActiveComment] = useState<number[]>([]);
-  const [activeAnswerMenu, setActiveAnswerMenu] = useState<number[]>([]);
+  const [activeComment, setActiveComment] = useState<string[]>([]);
+  const [activeAnswerMenu, setActiveAnswerMenu] = useState<string[]>([]);
   const [isPinAnswer, setIsPinAnswer] = useState<boolean>(false);
   const getModalAnswer = () => {};
   const withdrawalText = '답변 채택 시 질문과 답변의 수정, 삭제 및 \n해당 질문에 대한 추가 답변 작성이 불가합니다.\n정말 답변을 채택하시겠습니까?';
@@ -32,7 +32,7 @@ export default function CommunityQADetailAnswer({ isCommentOpen, setIsCommentOpe
   const logInUserInfo = useRecoilValue(loginUserInfo);
 
   const [userId, setUserId] = useState<number>();
-  const [answerId, setAnswerId] = useState<number>();
+  const [answerId, setAnswerId] = useState<string>();
 
   //리액트 쿼리
   const { data: answerData, refetch: answerRefetch } = useCommunityAnswerQuery(String(postId));
@@ -55,20 +55,20 @@ export default function CommunityQADetailAnswer({ isCommentOpen, setIsCommentOpe
     followMutate();
   };
 
-  const handleClickPinAnswer = async (answerId: number) => {
+  const handleClickPinAnswer = async (answerId: string) => {
     setAnswerId(answerId);
     await pinAnswerMutateAsync();
     answerRefetch();
   };
 
-  const handleClickDeleteAnswer = async (answerId: number) => {
+  const handleClickDeleteAnswer = async (answerId: string) => {
     setAnswerId(answerId);
     await deleteAnswerMutate();
     detailRefetch();
   };
 
   useEffect(() => {
-    if (answerData?.content.some((answer: QnaAnswerContentType) => answer.qnaAnswerPin)) {
+    if (answerData?.some((answer: QnaAnswerContentType) => answer.isPinned)) {
       setAnswerPin(true);
     } else {
       setAnswerPin(false);
@@ -93,9 +93,9 @@ export default function CommunityQADetailAnswer({ isCommentOpen, setIsCommentOpe
     <>
       <PicModal isPicPopUp={isPicPopUp} setIsPicPopUp={setIsPicPopUp} />
       {answerData &&
-        answerData?.content.map((answer: QnaAnswerContentType, idx: number) => {
+        answerData?.map((answer: QnaAnswerContentType, idx: number) => {
           return (
-            <div key={answer.id} className={'w-full overflow-hidden rounded-[20px] bg-midIvory dark:bg-midNavy ' + (answer.qnaAnswerPin ? 'border-4 border-pointGreen dark:border-sky ' : '')}>
+            <div key={answer.id} className={'w-full overflow-hidden rounded-[20px] bg-midIvory dark:bg-midNavy ' + (answer.isPinned ? 'border-4 border-pointGreen dark:border-sky ' : '')}>
               <ConfirmModal
                 action={() => handleClickPinAnswer(answer.id)}
                 confirmModal={isPinAnswer}
@@ -108,7 +108,7 @@ export default function CommunityQADetailAnswer({ isCommentOpen, setIsCommentOpe
 
               <div className="relative flex h-[55px] w-full items-center justify-between rounded-t-[20px] border-b border-b-darkIvory border-opacity-30 bg-midIvory p-5 text-[20px] font-bold dark:border-b-lightNavy dark:border-opacity-30 dark:bg-midNavy">
                 <div className="flex items-center gap-2">
-                  {answer.qnaAnswerPin && <FcApproval size={24} />}
+                  {answer.isPinned && <FcApproval size={24} />}
                   <span>답변 {idx + 1}</span>
                 </div>
                 {!answerPin && (
@@ -118,13 +118,13 @@ export default function CommunityQADetailAnswer({ isCommentOpen, setIsCommentOpe
                         채택하기
                       </span>
                     )}
-                    {logInUserInfo?.id === answer.member.id && (
+                    {logInUserInfo?.id === answer.user.id && (
                       <BsThreeDots
                         id={String(answer.id)}
                         className="cursor-pointer text-[24px]"
                         onClick={(e) => {
                           e.stopPropagation();
-                          if (Number(e.currentTarget.id) === answer.id) {
+                          if (String(e.currentTarget.id) === answer.id) {
                             // answer 활성 메뉴 선택
                             if (activeAnswerMenu.includes(answer.id)) {
                               setActiveAnswerMenu(activeAnswerMenu.filter((id) => id !== answer.id));
@@ -164,30 +164,30 @@ export default function CommunityQADetailAnswer({ isCommentOpen, setIsCommentOpe
                     <LazyLoadImage
                       onClick={(e) => {
                         e.stopPropagation();
-                        navigate(`/otherProfile/${answer.member.id}/feed`);
+                        navigate(`/otherProfile/${answer.user.id}/feed`);
                       }}
                       className="aspect-square h-[58px] w-[58px] cursor-pointer rounded-full object-cover"
-                      src={S3_URL + answer.member.profileUrl}
-                      alt={answer.member.nickName}
+                      src={S3_URL + answer.user.profileUrl}
+                      alt={answer.user.nickName}
                     />
                     <div className="pl-3">
                       <div className="flex flex-col gap-1">
                         <p
                           onClick={(e) => {
                             e.stopPropagation();
-                            navigate(`/otherProfile/${answer.member.id}/feed`);
+                            navigate(`/otherProfile/${answer.user.id}/feed`);
                           }}
                           className="cursor-pointer text-xl font-bold"
                         >
-                          {answer.member.nickName}
+                          {answer.user.nickName}
                         </p>
                         <p className="text-[17px] opacity-50">{timeForToday(answer.createdAt)}</p>
                       </div>
                     </div>
                   </div>
-                  {answer.member.id !== logInUserInfo?.id && answer.member.status !== 'WITHDREW' && (
+                  {/* {answer.user.id !== logInUserInfo?.id && answer.user.status !== 'WITHDREW' && (
                     <div className="text-end font-bold">
-                      <div onClick={(e) => handleClickFollow(e, answer.member.id)} className="flex h-full items-center justify-end ">
+                      <div onClick={(e) => handleClickFollow(e, answer.user.id)} className="flex h-full items-center justify-end ">
                         <div className="flex cursor-pointer gap-3 whitespace-nowrap">
                           {answer.follow ? (
                             <>
@@ -203,7 +203,7 @@ export default function CommunityQADetailAnswer({ isCommentOpen, setIsCommentOpe
                         </div>
                       </div>
                     </div>
-                  )}
+                  )} */}
                 </div>
                 <div className="w-full">
                   <p className="text-base">{answer.content}</p>
@@ -212,16 +212,16 @@ export default function CommunityQADetailAnswer({ isCommentOpen, setIsCommentOpe
               {answer?.imageUrls && answer?.imageUrls.length > 0 && answer?.imageUrls[0] !== 'https://budproject.s3.ap-northeast-2.amazonaws.com/null' && (
                 <ImagePeek setIsPicPopUp={setIsPicPopUp} imgPeek={answer?.imageUrls.map((i) => S3_URL + i) as string[]} />
               )}
-              <div className={'mt-4 flex h-[54px] w-full items-center gap-8 rounded-b-[20px] bg-[#a49c7c] p-4 text-base text-white dark:bg-[#383030] ' + (answer.qnaAnswerPin ? '!rounded-none' : '')}>
+              <div className={'mt-4 flex h-[54px] w-full items-center gap-8 rounded-b-[20px] bg-[#a49c7c] p-4 text-base text-white dark:bg-[#383030] ' + (answer.isPinned ? '!rounded-none' : '')}>
                 <div onClick={() => likeAnswerMutate(answer.id)} className="flex cursor-pointer items-center gap-2">
                   {answer.like ? <FcLike size="20px" /> : <FcLike className="opacity-50 brightness-[5]" size="20px" />}
                   {answer.likeCount}
                 </div>
-                <div
+                {/* <div
                   id={String(answer.id)}
                   onClick={(e) => {
                     e.stopPropagation();
-                    if (Number(e.currentTarget.id) === answer.id) {
+                    if (String(e.currentTarget.id) === answer.id) {
                       // answer 활성 댓글 선택
                       if (activeComment.includes(answer.id)) {
                         setActiveComment(activeComment.filter((id) => id !== answer.id));
@@ -235,13 +235,13 @@ export default function CommunityQADetailAnswer({ isCommentOpen, setIsCommentOpe
                 >
                   <FcSms size={'20px'} />
                   {answer.commentCount}
-                </div>
+                </div> */}
               </div>
-              {isCommentOpen && activeComment.includes(answer.id) && (
+              {/* {isCommentOpen && activeComment.includes(answer.id) && (
                 <div className="mt-4 w-full">
-                  <CommunityCommentForm refetch={answerRefetch} commentCount={answer.commentCount} type="QNA" answerId={answer.id} questionUserId={answer.member.id} />
+                  <CommunityCommentForm refetch={answerRefetch} commentCount={answer.commentCount} type="QNA" answerId={answer.id} questionUserId={answer.user.id} />
                 </div>
-              )}
+              )} */}
             </div>
           );
         })}

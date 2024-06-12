@@ -1,6 +1,6 @@
 import customAxios from '../customAxios';
 
-export const postQnaAnswerLikeAxios = async (token: string, answerId: number) => {
+export const postQnaAnswerLikeAxios = async (token: string, answerId: string) => {
   return await customAxios({
     method: 'post',
     url: `/community/posts/answers/${answerId}/like`,

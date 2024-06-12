@@ -37,15 +37,15 @@ interface QnaAnswerContentMemberType {
 export interface QnaAnswerContentType {
   like: boolean;
   follow: boolean;
-  id: number;
-  member: QnaAnswerContentMemberType;
+  id: string;
+  user: QnaAnswerContentMemberType;
   content: string;
   commentCount: number;
   likeCount: number;
   qnaAnswerStatus: PostStatusType;
   createdAt: string;
   updatedAt: string;
-  qnaAnswerPin: boolean;
+  isPinned: boolean;
   imageUrls: string[];
 }
 export interface QnaAnswerType {

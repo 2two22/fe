@@ -18,14 +18,14 @@ export default function SetJob() {
   const [checkModal, setCheckModal] = useState<boolean>(false);
   const [notification, setNotification] = useState<SetNotificationType>({ post: true, follow: true });
 
-  const getNotificationToken = async () => {
-    try {
-      const fcmToken = await getFcmToken();
-      return fcmToken;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getNotificationToken = async () => {
+  //   try {
+  //     const fcmToken = await getFcmToken();
+  //     return fcmToken;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // 리코일
   const [userInfo, setUserInfo] = useRecoilState(addUserInfo);
@@ -60,7 +60,7 @@ export default function SetJob() {
 
   return (
     <>
-      <CheckBoxModal checkModal={checkModal} setCheckModal={setCheckModal} action={action} />
+      {/* <CheckBoxModal checkModal={checkModal} setCheckModal={setCheckModal} action={action} /> */}
       <motion.div initial={{ opacity: 0, y: '5%' }} animate={{ opacity: 1, y: '0' }} transition={{ duration: 0.5 }}>
         <div className="flex flex-col items-center gap-8 p-4">
           <div className="flex flex-col items-center gap-2">
@@ -77,7 +77,7 @@ export default function SetJob() {
               이전
             </button>
             <button
-              onClick={onClickHandler}
+              onClick={action}
               disabled={!(userInfo.job.length > 0)}
               type="button"
               className="rounded-full border-[2px] border-pointGreen bg-pointGreen py-2 px-5 text-lg text-white drop-shadow-2xl transition-all hover:border-white disabled:opacity-0  hover:dark:border-white"

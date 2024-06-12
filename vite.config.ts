@@ -8,6 +8,8 @@ export default defineConfig({
     target: 'esnext',
   },
   server: {
+    host: true,
+    port: 5173,
     proxy: {
       '/api': {
         target: 'http://34-64-143-137.nip.io',

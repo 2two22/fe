@@ -273,7 +273,7 @@ export function usePostQnaAnswerLikeMutation(postId: string) {
   //리코일
   const loginUser = useRecoilValue(loginUserInfo);
   const { refetch } = useCommunityAnswerQuery(postId);
-  return useMutation((id: number) => postQnaAnswerLikeAxios(loginUser?.token as string, id), {
+  return useMutation((id: string) => postQnaAnswerLikeAxios(loginUser?.token as string, id), {
     onError: (err) => {
       console.log(err);
     },
